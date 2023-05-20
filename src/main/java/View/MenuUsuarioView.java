@@ -22,12 +22,9 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     }
     
     private void addAcoes(){
-        btPessoas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConsultaPessoasView consultaPessoasView = new ConsultaPessoasView();
-                consultaPessoasView.setVisible(true);
-            }
+        btPessoas.addActionListener(e -> {
+            ConsultaPessoasView consultaPessoasView = new ConsultaPessoasView();
+            consultaPessoasView.setVisible(true);
         });
     }
 

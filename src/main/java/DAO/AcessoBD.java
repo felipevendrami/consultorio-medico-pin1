@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
  */
 public class AcessoBD {
     
-    protected EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("consulta-medico-jpa-pu");
+    protected EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("whitehouse");
     protected EntityManager entityManager = entityManagerFactory.createEntityManager();
     
 }

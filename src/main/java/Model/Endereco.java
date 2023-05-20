@@ -33,10 +33,7 @@ public class Endereco {
     
     @Column(nullable = false, length = 60)
     private String bairro;
-    
-    @Column(nullable = false, length = 255)
-    private String logradouro;
-    
+
     @Column(length = 60)
     private String complemento;
     
@@ -51,9 +48,8 @@ public class Endereco {
 
     public Endereco(){}
     
-    public Endereco(Integer cep, String logradouro, String bairro, String complemento, String cidade, Integer numero, String uf) {
+    public Endereco(Integer cep, String bairro, String complemento, String cidade, Integer numero, String uf) {
         this.cep = cep;
-        this.logradouro = logradouro;
         this.bairro = bairro;
         this.complemento = complemento;
         this.cidade = cidade;
@@ -115,14 +111,6 @@ public class Endereco {
 
     public void setUf(String uf) {
         this.uf = uf;
-    }
-    
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
     }
     
 }

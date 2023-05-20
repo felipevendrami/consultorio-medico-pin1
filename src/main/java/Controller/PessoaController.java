@@ -21,9 +21,6 @@ public class PessoaController {
     private List<PessoaObserver> pessoaView = new ArrayList<>();
     private PessoaTableModel pessoaTableModel;
 
-    public PessoaController() {
-    }
-
     public void addViewObserver(PessoaObserver obs) {
         this.pessoaView.add(obs);
     }
@@ -37,11 +34,11 @@ public class PessoaController {
     }
 
     public void preencherTabelaPessoa() throws Exception {
-        List<Pessoa> pessoas = pessoaDao.getTodasPessoas();
+        List pessoas = pessoaDao.getTodasPessoas();
         pessoaTableModel = new PessoaTableModel(pessoas);
         for (PessoaObserver view : pessoaView) {
             view.listarPessoas(pessoaTableModel);
-        };
+        }
     }
     
     public void buscaPessoa(Long idUsuario) throws Exception{
