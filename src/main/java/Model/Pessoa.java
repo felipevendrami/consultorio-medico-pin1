@@ -32,7 +32,7 @@ public class Pessoa {
     private String nome;
     
     @Column(nullable = false, unique = true, length = 11)
-    private Integer cpf;
+    private Long cpf;
     
     @Column(nullable = false, length = 1)
     private String genero;
@@ -41,7 +41,7 @@ public class Pessoa {
     private String email;
     
     @Column(nullable = false, length = 12)
-    private Integer contato;
+    private Long contato;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco")
@@ -49,7 +49,7 @@ public class Pessoa {
 
     public Pessoa(){}
     
-    public Pessoa(String nome, Integer cpf, String genero, String email, Integer contato, Endereco endereco) {
+    public Pessoa(String nome, Long cpf, String genero, String email, Long contato, Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.genero = genero;
@@ -74,11 +74,11 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Integer getCpf() {
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 
@@ -98,11 +98,11 @@ public class Pessoa {
         this.email = email;
     }
 
-    public int getContato() {
+    public Long getContato() {
         return contato;
     }
 
-    public void setContato(int contato) {
+    public void setContato(Long contato) {
         this.contato = contato;
     }
 

@@ -42,19 +42,12 @@ public class PessoaTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Pessoa pessoa = this.pessoas.get(rowIndex);
-        String valor = null;
-        switch(columnIndex){
-            case COLUNA_ID:
-                valor = String.valueOf(pessoa.getId());
-                break;
-            case COLUNA_NOME:
-                valor = String.valueOf(pessoa.getNome());
-                break;
-            case COLUNA_CPF:
-                valor = String.valueOf(pessoa.getCpf());
-                break;
-        }
-        return valor;
+        return switch (columnIndex) {
+            case COLUNA_ID -> String.valueOf(pessoa.getId());
+            case COLUNA_NOME -> String.valueOf(pessoa.getNome());
+            case COLUNA_CPF -> String.valueOf(pessoa.getCpf());
+            default -> null;
+        };
     }
     
 }

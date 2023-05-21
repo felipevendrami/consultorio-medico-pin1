@@ -27,21 +27,19 @@ public class PessoaDao extends AcessoBD {
         }
     }
 
-    public List<Pessoa> getTodasPessoas() throws Exception {
+    public List getTodasPessoas() throws Exception {
         try {
-            Query query = entityManager.createQuery("SELECT u FROM Pessoa u");
-            List<Pessoa> usuarios = query.getResultList();
-            return usuarios;
+            Query query = entityManager.createQuery("select p from Pessoa p");
+            return query.getResultList();
         } catch (Exception e) {
             System.err.println(e.getMessage());
             throw new Exception("Ocorreu um problema durante a busca de pessoas.");
         }
     }
 
-    public Pessoa getPessoa(Long idUsuario) throws Exception {
+    public Pessoa getPessoa(Long idPessoa) throws Exception {
         try {
-            Pessoa pessoa = entityManager.find(Pessoa.class, idUsuario);
-            return pessoa;
+            return entityManager.find(Pessoa.class, idPessoa);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             throw new Exception("Ocorreu um problema durante a busca da pessoa.");

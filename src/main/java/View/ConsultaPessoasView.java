@@ -18,11 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObserver{
 
-    /**
-     * Creates new form ConsultaPessoasView
-     */
-    
-    private PessoaController pessoaController;
+    private final PessoaController pessoaController;
     
     public ConsultaPessoasView() {
         initComponents();
@@ -37,43 +33,26 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
     }
     
     private void addAcoes(){
-        btCadastrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CadastroPessoaView cadPessoaView = new CadastroPessoaView(pessoaController);
-                cadPessoaView.setVisible(true);
+        btCadastrar.addActionListener(e -> {
+            CadastroPessoaView cadPessoaView = new CadastroPessoaView(pessoaController);
+            cadPessoaView.setVisible(true);
+        });
+        btAlterar.addActionListener(e -> {
+            try {
+                AlteraPessoaView alteraPessoaView = new AlteraPessoaView(pessoaController, getIdUsuario());
+                alteraPessoaView.setVisible(true);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
             }
         });
-        btAlterar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    AlteraPessoaView alteraPessoaView = new AlteraPessoaView(pessoaController, getIdUsuario());
-                    alteraPessoaView.setVisible(true);
-                } catch (Exception ex) {
-                    exibirMensagem(ex.getMessage());
-                }
-            }
+        btVisualizar.addActionListener(e -> {
+            VisualizaPessoaView visualizaPessoaView = new VisualizaPessoaView();
+            visualizaPessoaView.setVisible(true);
         });
-        btVisualizar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VisualizaPessoaView visualizaPessoaView = new VisualizaPessoaView();
-                visualizaPessoaView.setVisible(true);
-            }
+        btDeletar.addActionListener(e -> {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         });
-        btDeletar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        });
-        btVoltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
+        btVoltar.addActionListener(e -> setVisible(false));
     }
 
     public Long getIdUsuario() throws Exception{

@@ -68,8 +68,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
             throw new Exception("Campo \"Contato\" é obrigatório.");
         } else if (tfCep.getText().isBlank()) {
             throw new Exception("Campo \"CEP\" é obrigatório.");
-        } else if (tfLogradouro.getText().isBlank()) {
-            throw new Exception("Campo \"Logradouro\" é obrigatório.");
         } else if (tfBairro.getText().isBlank()) {
             throw new Exception("Campo \"Bairro\" é obrigatório.");
         } else if (tfCidade.getText().isBlank()) {
@@ -80,12 +78,12 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
     }
 
     private Pessoa montaPessoa() {
-        Pessoa pessoa = new Pessoa(tfNome.getText(), Integer.parseInt(tfCpf.getText()), getGenero(), tfEmail.getText(), Integer.parseInt(tfContato.getText()), montaEndereco());
+        Pessoa pessoa = new Pessoa(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
         return pessoa;
     }
 
     private Endereco montaEndereco() {
-        Endereco endereco = new Endereco(Integer.parseInt(tfCep.getText()), tfLogradouro.getText(), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText());
+        Endereco endereco = new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText());
         return endereco;
     }
 
@@ -125,7 +123,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
         jpEndereco = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         tfCep = new javax.swing.JTextField();
-        tfLogradouro = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         tfBairro = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -243,11 +240,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
 
         tfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tfLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Logradouro:");
-
         tfBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -287,10 +279,7 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
                                 .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        )
                         .addGap(35, 35, 35))
                     .addGroup(jpEnderecoLayout.createSequentialGroup()
                         .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -325,10 +314,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
                 .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -428,7 +413,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
     private javax.swing.JTextField tfContato;
     private javax.swing.JTextField tfCpf;
     private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfLogradouro;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfNumero;
     private javax.swing.JTextField tfUf;
@@ -456,7 +440,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
         tfEmail.setText(pessoa.getEmail());
         tfContato.setText(String.valueOf(pessoa.getContato()));
         tfCep.setText(pessoa.getEndereco().getCep().toString());
-        tfLogradouro.setText(pessoa.getEndereco().getLogradouro());
         tfBairro.setText(pessoa.getEndereco().getBairro());
         tfComplemento.setText(pessoa.getEndereco().getComplemento());
         tfCidade.setText(pessoa.getEndereco().getCidade());
