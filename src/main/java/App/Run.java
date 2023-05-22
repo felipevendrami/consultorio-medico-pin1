@@ -4,7 +4,8 @@
  */
 package App;
 
-import View.MenuUsuarioView;
+import View.Menu.MenuUsuarioView;
+import javax.swing.JOptionPane;
 
 /**
  *

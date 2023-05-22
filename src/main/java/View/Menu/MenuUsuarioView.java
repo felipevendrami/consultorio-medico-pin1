@@ -2,19 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package View.Menu;
+
+import View.Pessoa.ConsultaPessoaView;
+import View.Pessoa.ConsultaUsuarioView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author felip
  */
-public class MenuMedicoView extends javax.swing.JFrame {
+public class MenuUsuarioView extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuUsuarioView
      */
-    public MenuMedicoView() {
+    public MenuUsuarioView() {
         initComponents();
+        addAcoes();
+    }
+    
+    private void addAcoes(){
+        btPessoas.addActionListener(e -> {
+            ConsultaPessoaView consultaPessoasView = new ConsultaPessoaView();
+            consultaPessoasView.setVisible(true);
+        });
+        btUsuarios.addActionListener(e -> {
+            ConsultaUsuarioView consultaUsuarioView = new ConsultaUsuarioView();
+            consultaUsuarioView.setVisible(true);
+        });
     }
 
     /**
@@ -29,8 +46,11 @@ public class MenuMedicoView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         btLogout = new javax.swing.JButton();
-        btReceitas = new javax.swing.JButton();
+        btPessoas = new javax.swing.JButton();
+        btMedicos = new javax.swing.JButton();
         btAgendamentos = new javax.swing.JButton();
+        btEspecialidades = new javax.swing.JButton();
+        btUsuarios = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,15 +67,25 @@ public class MenuMedicoView extends javax.swing.JFrame {
         btLogout.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btLogout.setText("Logout");
 
-        btReceitas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        btReceitas.setText("Receitas Médicas");
-        btReceitas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btReceitas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btReceitas.setMaximumSize(new java.awt.Dimension(160, 150));
-        btReceitas.setMinimumSize(new java.awt.Dimension(160, 150));
-        btReceitas.setPreferredSize(new java.awt.Dimension(160, 150));
-        btReceitas.setVerifyInputWhenFocusTarget(false);
-        btReceitas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPessoas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btPessoas.setText("Pessoas");
+        btPessoas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btPessoas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPessoas.setMaximumSize(new java.awt.Dimension(160, 150));
+        btPessoas.setMinimumSize(new java.awt.Dimension(160, 150));
+        btPessoas.setPreferredSize(new java.awt.Dimension(160, 150));
+        btPessoas.setVerifyInputWhenFocusTarget(false);
+        btPessoas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        btMedicos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btMedicos.setText("Médicos");
+        btMedicos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btMedicos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btMedicos.setMaximumSize(new java.awt.Dimension(160, 150));
+        btMedicos.setMinimumSize(new java.awt.Dimension(160, 150));
+        btMedicos.setPreferredSize(new java.awt.Dimension(160, 150));
+        btMedicos.setVerifyInputWhenFocusTarget(false);
+        btMedicos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btAgendamentos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btAgendamentos.setText("Agendamentos");
@@ -66,6 +96,26 @@ public class MenuMedicoView extends javax.swing.JFrame {
         btAgendamentos.setPreferredSize(new java.awt.Dimension(160, 150));
         btAgendamentos.setVerifyInputWhenFocusTarget(false);
         btAgendamentos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        btEspecialidades.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btEspecialidades.setText("Especialidades");
+        btEspecialidades.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btEspecialidades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btEspecialidades.setMaximumSize(new java.awt.Dimension(160, 150));
+        btEspecialidades.setMinimumSize(new java.awt.Dimension(160, 150));
+        btEspecialidades.setPreferredSize(new java.awt.Dimension(160, 150));
+        btEspecialidades.setVerifyInputWhenFocusTarget(false);
+        btEspecialidades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        btUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btUsuarios.setText("Usuários");
+        btUsuarios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btUsuarios.setMaximumSize(new java.awt.Dimension(160, 150));
+        btUsuarios.setMinimumSize(new java.awt.Dimension(160, 150));
+        btUsuarios.setPreferredSize(new java.awt.Dimension(160, 150));
+        btUsuarios.setVerifyInputWhenFocusTarget(false);
+        btUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Menu");
@@ -87,10 +137,16 @@ public class MenuMedicoView extends javax.swing.JFrame {
                         .addComponent(btLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(btMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addComponent(btAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(417, 417, 417))))
+                        .addGap(35, 35, 35)
+                        .addComponent(btEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,9 +163,13 @@ public class MenuMedicoView extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(343, Short.MAX_VALUE))
+                    .addComponent(btPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addComponent(btUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,11 +178,14 @@ public class MenuMedicoView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgendamentos;
+    private javax.swing.JButton btEspecialidades;
     private javax.swing.JButton btLogout;
-    private javax.swing.JButton btReceitas;
+    private javax.swing.JButton btMedicos;
+    private javax.swing.JButton btPessoas;
+    private javax.swing.JButton btUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;

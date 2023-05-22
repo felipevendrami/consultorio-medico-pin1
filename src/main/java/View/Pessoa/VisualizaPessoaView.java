@@ -2,22 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package View.Pessoa;
 
 import Controller.Observer.PessoaObserver;
 import Controller.PessoaController;
-import Model.Endereco;
 import Model.Pessoa;
 import TableModel.PessoaTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author felip
  */
-public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObserver{
+public class VisualizaPessoaView extends javax.swing.JFrame implements PessoaObserver{
 
     /**
      * Creates new form ConsultaPessoasView
@@ -25,73 +22,22 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
     
     private PessoaController pessoaController;
     
-    public CadastroPessoaView(PessoaController pessoaController) {
+    public VisualizaPessoaView(PessoaController pessoaController, Long idPessoa) {
         initComponents();
         this.pessoaController = pessoaController;
+        this.pessoaController.addViewObserver(this);
+        try {
+            this.pessoaController.buscaPessoa(idPessoa);
+        } catch (Exception e) {
+            exibirMensagem(e.getMessage());
+        }
         addAcoes();
-        
     }
 
     private void addAcoes(){
-        btConfirmar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    validaCampos();
-                    pessoaController.gravarPessoa(montaPessoa());
-                    setVisible(false);
-                } catch (Exception ex) {
-                    exibirMensagem(ex.getMessage());
-                }
-            }
+        btVoltar.addActionListener(e -> {
+            setVisible(false);
         });
-        btVoltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
-    }
-    
-    private void validaCampos() throws Exception{
-        if(tfNome.getText().isBlank()){
-            throw new Exception("Campo \"Nome\" é obrigatório.");
-        } else if (tfCpf.getText().isBlank()){
-            throw new Exception("Campo \"CPF\" é obrigatório.");
-        } else if (cbGenero.getSelectedItem().equals(null)){
-            throw new Exception("Selecione o campo \"Gênero\".");
-        } else if (tfContato.getText().isBlank()){
-            throw new Exception("Campo \"Contato\" é obrigatório.");
-        } else if (tfCep.getText().isBlank()){
-            throw new Exception("Campo \"CEP\" é obrigatório.");
-        } else if (tfLogradouro.getText().isBlank()){
-            throw new Exception("Campo \"Logradouro\" é obrigatório.");
-        } else if (tfBairro.getText().isBlank()){
-            throw new Exception("Campo \"Bairro\" é obrigatório.");
-        } else if (tfCidade.getText().isBlank()){
-            throw new Exception("Campo \"Cidade\" é obrigatório.");
-        } else if (tfUf.getText().isBlank()){
-            throw new Exception("Campo \"UF\" é obrigatório.");
-        }
-    }
-    
-    private Pessoa montaPessoa(){
-        Pessoa pessoa = new Pessoa(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
-        return pessoa;
-    }
-    
-    private Endereco montaEndereco(){
-        Endereco endereco = new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText());
-        return endereco;
-    }
-    
-    private String getGenero(){
-        String genero = cbGenero.getItemAt(cbGenero.getSelectedIndex());
-        if(genero.equals("Feminino")){
-            return "F";
-        } else {
-            return "M";
-        }
     }
     
     /**
@@ -133,10 +79,9 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         tfUf = new javax.swing.JTextField();
-        btConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Sistema - Cadastro Pessoa");
+        setTitle("Sistema - Visualizar Pessoa");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -146,7 +91,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         btVoltar.setText("Voltar");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("> Cadastro de Pessoa");
+        jLabel2.setText("> Visualizar Pessoa");
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -157,8 +102,10 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel3.setText("Nome:");
 
         tfNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfNome.setEnabled(false);
 
         tfCpf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCpf.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("CPF:");
@@ -168,11 +115,13 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
 
         cbGenero.setEditable(true);
         cbGenero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino" }));
+        cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", " " }));
         cbGenero.setSelectedIndex(-1);
-        cbGenero.setToolTipText("a");
+        cbGenero.setToolTipText("");
+        cbGenero.setEnabled(false);
 
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEmail.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("E-mail:");
@@ -181,6 +130,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel7.setText("Contato:");
 
         tfContato.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfContato.setEnabled(false);
 
         javax.swing.GroupLayout jpGeralLayout = new javax.swing.GroupLayout(jpGeral);
         jpGeral.setLayout(jpGeralLayout);
@@ -238,18 +188,22 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel8.setText("CEP:");
 
         tfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCep.setEnabled(false);
 
         tfLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfLogradouro.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Logradouro:");
 
         tfBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfBairro.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Bairro:");
 
         tfComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfComplemento.setEnabled(false);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Complemento:");
@@ -258,8 +212,10 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel12.setText("Cidade:");
 
         tfCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCidade.setEnabled(false);
 
         tfNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfNumero.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Número:");
@@ -268,6 +224,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel14.setText("UF:");
 
         tfUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfUf.setEnabled(false);
 
         javax.swing.GroupLayout jpEnderecoLayout = new javax.swing.GroupLayout(jpEndereco);
         jpEndereco.setLayout(jpEnderecoLayout);
@@ -300,7 +257,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
                         .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
             .addGroup(jpEnderecoLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(93, 93, 93)
                 .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpEnderecoLayout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -348,9 +305,6 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
 
         jTabbedPane1.addTab("Endereço", jpEndereco);
 
-        btConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btConfirmar.setText("Confirmar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,11 +316,8 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btVoltar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btConfirmar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -380,9 +331,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVoltar)
-                    .addComponent(btConfirmar))
+                .addComponent(btVoltar)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -396,7 +345,6 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox<String> cbGenero;
     private javax.swing.JLabel jLabel1;
@@ -441,6 +389,20 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
 
     @Override
     public void retornaPessoa(Pessoa pessoa) {
-        // SEM IMPLEMENTRAÇÃO
+        tfNome.setText(pessoa.getNome());
+        tfCpf.setText(pessoa.getCpf().toString());
+        if (pessoa.getGenero().equals("F")) {
+            cbGenero.setSelectedIndex(0);
+        } else {
+            cbGenero.setSelectedIndex(1);
+        }
+        tfEmail.setText(pessoa.getEmail());
+        tfContato.setText(String.valueOf(pessoa.getContato()));
+        tfCep.setText(pessoa.getEndereco().getCep().toString());
+        tfBairro.setText(pessoa.getEndereco().getBairro());
+        tfComplemento.setText(pessoa.getEndereco().getComplemento());
+        tfCidade.setText(pessoa.getEndereco().getCidade());
+        tfNumero.setText(pessoa.getEndereco().getNumero().toString());
+        tfUf.setText(pessoa.getEndereco().getUf());
     }
 }

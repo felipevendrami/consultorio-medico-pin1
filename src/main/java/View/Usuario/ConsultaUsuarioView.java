@@ -2,73 +2,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package View.Pessoa;
 
-import Controller.Observer.PessoaObserver;
-import Controller.PessoaController;
-import Model.Pessoa;
-import TableModel.PessoaTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import Controller.Observer.UsuarioObserver;
+import Controller.UsuarioController;
+import Model.Usuario;
+import TableModel.UsuarioTableModel;
 
 /**
  *
  * @author felip
  */
-public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObserver{
-
-    private final PessoaController pessoaController;
+public class ConsultaUsuarioView extends javax.swing.JFrame implements UsuarioObserver{
     
-    public ConsultaPessoasView() {
+    private UsuarioController usuarioController;
+    
+    public ConsultaUsuarioView() {
         initComponents();
-        this.pessoaController = new PessoaController();
-        pessoaController.addViewObserver(this);
+        this.usuarioController = new UsuarioController();
+        this.usuarioController.addViewObserver(this);
         try {
-            pessoaController.preencherTabelaPessoa();
+            usuarioController.preencherTabelaUsuario();
             addAcoes();
         } catch (Exception e) {
-            exibirMensagem(e.getMessage());
         }
     }
     
     private void addAcoes(){
         btCadastrar.addActionListener(e -> {
-            CadastroPessoaView cadPessoaView = new CadastroPessoaView(pessoaController);
-            cadPessoaView.setVisible(true);
+        
         });
         btAlterar.addActionListener(e -> {
-            try {
-                AlteraPessoaView alteraPessoaView = new AlteraPessoaView(pessoaController, getIdPessoa());
-                alteraPessoaView.setVisible(true);
-            } catch (Exception ex) {
-                exibirMensagem(ex.getMessage());
-            }
+        
         });
         btVisualizar.addActionListener(e -> {
-            try {
-                VisualizaPessoaView visualizaPessoaView = new VisualizaPessoaView(pessoaController, getIdPessoa());
-                visualizaPessoaView.setVisible(true);
-            } catch (Exception ex) {
-                exibirMensagem(ex.getMessage());
-            }
+        
         });
         btDeletar.addActionListener(e -> {
-            try {
-                this.pessoaController.excluirPessoa(getIdPessoa());
-            } catch (Exception ex) {
-                exibirMensagem(ex.getMessage());
-            }
+        
         });
-        btVoltar.addActionListener(e -> setVisible(false));
-    }
-
-    public Long getIdPessoa() throws Exception{
-        if(tbPessoas.getSelectedRow() == -1){
-            throw new Exception("Nenhuma linha selecionada");
-        } else {
-            return Long.parseLong(tbPessoas.getModel().getValueAt(tbPessoas.getSelectedRow(), 0).toString());
-        }
+        btVoltar.addActionListener(e -> {
+            setVisible(false);
+        });
     }
     
     /**
@@ -82,7 +57,7 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbPessoas = new javax.swing.JTable();
+        tbUsuarios = new javax.swing.JTable();
         btCadastrar = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
         btVisualizar = new javax.swing.JButton();
@@ -90,17 +65,15 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
         btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Sistema - Consulta Pessoas");
-        setMaximumSize(new java.awt.Dimension(800, 500));
+        setTitle("Sistema - Consulta Usuários");
         setMinimumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Pessoas");
+        jLabel1.setText("Usuários");
 
-        tbPessoas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tbPessoas.setModel(new javax.swing.table.DefaultTableModel(
+        tbUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -111,7 +84,7 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbPessoas);
+        jScrollPane1.setViewportView(tbUsuarios);
 
         btCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btCadastrar.setText("Cadastrar");
@@ -183,21 +156,22 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
     private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbPessoas;
+    private javax.swing.JTable tbUsuarios;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void listarPessoas(PessoaTableModel tableModel) {
-        tbPessoas.setModel(tableModel);
+    public void listarUsuarios(UsuarioTableModel tableModel) {
+        tbUsuarios.setModel(tableModel);
     }
 
     @Override
-    public void retornaPessoa(Pessoa pessoa){
-        // SEM IMPLEMENTAÇÃO
+    public void retornaUsuario(Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

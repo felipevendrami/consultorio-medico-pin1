@@ -1,1 +1,13 @@
+Model\Atendimento_.class
+Model\Medico_.class
+Model\Usuario_.class
 App\Run.class
+Model\Atendimento.class
+Model\Medico.class
+Model\Especialidade.class
+Model\Receita.class
+Model\Receita_.class
+Model\Agendamento.class
+Model\Agendamento_.class
+Model\Usuario.class
+Model\Especialidade_.class
