@@ -41,8 +41,8 @@ public class PessoaController {
         }
     }
     
-    public void buscaPessoa(Long idUsuario) throws Exception{
-        Pessoa pessoa = pessoaDao.getPessoa(idUsuario);
+    public void buscaPessoa(Long idPessoa) throws Exception{
+        Pessoa pessoa = pessoaDao.getPessoa(idPessoa);
         for(PessoaObserver view : pessoaView){
             view.retornaPessoa(pessoa);
         }
@@ -50,9 +50,18 @@ public class PessoaController {
     
     public void modificaPessoa(Pessoa pessoaMod) throws Exception{
         pessoaDao.modifyPessoa(pessoaMod);
+        preencherTabelaPessoa();
         for(PessoaObserver view : pessoaView){
             view.exibirMensagem("Pessoa alterada com sucesso !");
-            preencherTabelaPessoa();
+        }
+    }
+    
+    public void excluirPessoa(Long idPessoa) throws Exception{
+        Pessoa pessoa = pessoaDao.getPessoa(idPessoa);
+        pessoaDao.deletePessoa(pessoa);
+        preencherTabelaPessoa();
+        for(PessoaObserver view : pessoaView){
+            view.exibirMensagem("Pessoa excluída com sucesso !");
         }
     }
 }

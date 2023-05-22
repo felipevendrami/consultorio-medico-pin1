@@ -22,8 +22,6 @@ public class PessoaDao extends AcessoBD {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
-            entityManager.close();
         }
     }
 
@@ -57,9 +55,18 @@ public class PessoaDao extends AcessoBD {
         } catch (Exception e) {
             System.err.println(e.getMessage());
             throw new Exception("Ocorreu um problema na alteração da pessoa.");
-        } finally {
-            entityManager.close();
         }
     }
 
+    public void deletePessoa(Pessoa pessoa) throws Exception{
+        try {            
+            entityManager.getTransaction().begin();
+            entityManager.remove(pessoa.getEndereco());
+            entityManager.remove(pessoa);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            throw new Exception("Ocorre um problema durante a exclusão da pessoa.");
+        }
+    }
+    
 }

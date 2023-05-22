@@ -4,19 +4,42 @@
  */
 package View;
 
+import Controller.Observer.PessoaObserver;
+import Controller.PessoaController;
+import Model.Pessoa;
+import TableModel.PessoaTableModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author felip
  */
-public class VisualizaPessoaView extends javax.swing.JFrame {
+public class VisualizaPessoaView extends javax.swing.JFrame implements PessoaObserver{
 
     /**
      * Creates new form ConsultaPessoasView
      */
-    public VisualizaPessoaView() {
+    
+    private PessoaController pessoaController;
+    
+    public VisualizaPessoaView(PessoaController pessoaController, Long idPessoa) {
         initComponents();
+        this.pessoaController = pessoaController;
+        this.pessoaController.addViewObserver(this);
+        try {
+            this.pessoaController.buscaPessoa(idPessoa);
+        } catch (Exception e) {
+            exibirMensagem(e.getMessage());
+        }
+        addAcoes();
     }
 
+    private void addAcoes(){
+        btVoltar.addActionListener(e -> {
+            setVisible(false);
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +79,6 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         tfUf = new javax.swing.JTextField();
-        tfConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema - Visualizar Pessoa");
@@ -210,44 +232,42 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
             jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEnderecoLayout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnderecoLayout.createSequentialGroup()
-                        .addGap(0, 15, Short.MAX_VALUE)
-                        .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35))
+                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpEnderecoLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpEnderecoLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpEnderecoLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpEnderecoLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
+            .addGroup(jpEnderecoLayout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpEnderecoLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpEnderecoLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpEnderecoLayout.setVerticalGroup(
             jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,9 +305,6 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Endereço", jpEndereco);
 
-        tfConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfConfirmar.setText("Confirmar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -299,11 +316,8 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btVoltar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfConfirmar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -317,9 +331,7 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVoltar)
-                    .addComponent(tfConfirmar))
+                .addComponent(btVoltar)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -356,7 +368,6 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
     private javax.swing.JTextField tfCep;
     private javax.swing.JTextField tfCidade;
     private javax.swing.JTextField tfComplemento;
-    private javax.swing.JButton tfConfirmar;
     private javax.swing.JTextField tfContato;
     private javax.swing.JTextField tfCpf;
     private javax.swing.JTextField tfEmail;
@@ -365,4 +376,33 @@ public class VisualizaPessoaView extends javax.swing.JFrame {
     private javax.swing.JTextField tfNumero;
     private javax.swing.JTextField tfUf;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void exibirMensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+
+    @Override
+    public void listarPessoas(PessoaTableModel tableModel) {
+        // SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void retornaPessoa(Pessoa pessoa) {
+        tfNome.setText(pessoa.getNome());
+        tfCpf.setText(pessoa.getCpf().toString());
+        if (pessoa.getGenero().equals("F")) {
+            cbGenero.setSelectedIndex(0);
+        } else {
+            cbGenero.setSelectedIndex(1);
+        }
+        tfEmail.setText(pessoa.getEmail());
+        tfContato.setText(String.valueOf(pessoa.getContato()));
+        tfCep.setText(pessoa.getEndereco().getCep().toString());
+        tfBairro.setText(pessoa.getEndereco().getBairro());
+        tfComplemento.setText(pessoa.getEndereco().getComplemento());
+        tfCidade.setText(pessoa.getEndereco().getCidade());
+        tfNumero.setText(pessoa.getEndereco().getNumero().toString());
+        tfUf.setText(pessoa.getEndereco().getUf());
+    }
 }

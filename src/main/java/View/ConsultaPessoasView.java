@@ -39,23 +39,31 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
         });
         btAlterar.addActionListener(e -> {
             try {
-                AlteraPessoaView alteraPessoaView = new AlteraPessoaView(pessoaController, getIdUsuario());
+                AlteraPessoaView alteraPessoaView = new AlteraPessoaView(pessoaController, getIdPessoa());
                 alteraPessoaView.setVisible(true);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
         btVisualizar.addActionListener(e -> {
-            VisualizaPessoaView visualizaPessoaView = new VisualizaPessoaView();
-            visualizaPessoaView.setVisible(true);
+            try {
+                VisualizaPessoaView visualizaPessoaView = new VisualizaPessoaView(pessoaController, getIdPessoa());
+                visualizaPessoaView.setVisible(true);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btDeletar.addActionListener(e -> {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            try {
+                this.pessoaController.excluirPessoa(getIdPessoa());
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btVoltar.addActionListener(e -> setVisible(false));
     }
 
-    public Long getIdUsuario() throws Exception{
+    public Long getIdPessoa() throws Exception{
         if(tbPessoas.getSelectedRow() == -1){
             throw new Exception("Nenhuma linha selecionada");
         } else {
@@ -189,7 +197,7 @@ public class ConsultaPessoasView extends javax.swing.JFrame implements PessoaObs
     }
 
     @Override
-    public void retornaPessoa(Pessoa pessoa) {
+    public void retornaPessoa(Pessoa pessoa){
         // SEM IMPLEMENTAÇÃO
     }
 }
