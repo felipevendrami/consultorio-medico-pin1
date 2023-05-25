@@ -11,7 +11,7 @@ import TableModel.PessoaTableModel;
  *
  * @author felip
  */
-public interface PessoaObserver {
+public interface PessoaObserver{
     
     void exibirMensagem(String msg);
     void listarPessoas(PessoaTableModel tableModel);

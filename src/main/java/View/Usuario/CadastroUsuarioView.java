@@ -4,38 +4,81 @@
  */
 package View.Usuario;
 
-import View.Pessoa.*;
-import Controller.Observer.PessoaObserver;
-import Controller.PessoaController;
-import Model.Endereco;
+import Controller.Observer.UsuarioObserver;
+import Controller.UsuarioController;
 import Model.Pessoa;
-import TableModel.PessoaTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Model.Usuario;
+import TableModel.UsuarioTableModel;
+import View.Listas.ListaPessoasView;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author felip
  */
-public class CadastroUsuarioView extends javax.swing.JFrame{
+public class CadastroUsuarioView extends javax.swing.JFrame implements UsuarioObserver{
 
     /**
      * Creates new form ConsultaPessoasView
      */
     
+    private UsuarioController usuarioController;
     
-    public CadastroUsuarioView(PessoaController pessoaController) {
+    public CadastroUsuarioView(UsuarioController usuarioController) {
         initComponents();
-        
+        this.usuarioController = usuarioController;
+        this.usuarioController.addViewObserver(this);
+        addAcoes();
     }
 
     private void addAcoes(){
-        
+        btListarPessoas.addActionListener(e -> {
+            try {
+                ListaPessoasView listaPessoasView = new ListaPessoasView(usuarioController);
+                listaPessoasView.setVisible(true);
+            } catch (Exception ex) {
+            }
+        });
+        btConfirmar.addActionListener(e -> {
+            try {
+                validaCampos();
+                usuarioController.gravarUsuario(montaUsuario());
+                setVisible(false);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
+        });
+        btVoltar.addActionListener(e -> {
+            setVisible(false);
+        });
     }
     
-    private void validaCampos() throws Exception{
+    private Usuario montaUsuario() {
+        Usuario usuario = new Usuario(null, pfSenha.getText(), getSituacao());
+        return usuario;
+    }
+    
+    private String getSituacao(){
+        String situacao = cbSituacao.getItemAt(cbSituacao.getSelectedIndex());
+        if(situacao.equals("Ativo")){
+            return "A";
+        } else {
+            return "I";
+        }
+    }
         
+    private void validaCampos() throws Exception{
+        if(tfPessoa.getText().isBlank()){
+            throw new Exception("Você precisa selecionar uma Pessoa para prosseguir.");
+        } else if (tfEmail.getText().isBlank()){
+            throw new Exception("É preciso que a pessoa selecionada possua \"E-mail\" cadastrado.");
+        } else if (pfSenha.getText().isBlank()){
+            throw new Exception("Campo \"Senha\" é obrigatório.");
+        } else if (pfSenha.getText().length() < 6){
+            throw new Exception("Campo \"Senha\" não pode ter menos de 6 caractéres.");
+        } else if (cbSituacao.getSelectedIndex() == -1){
+            throw new Exception("Seleciona o campo \"Situação\".");
+        }
     }
     
     /**
@@ -56,10 +99,10 @@ public class CadastroUsuarioView extends javax.swing.JFrame{
         btListarPessoas = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
-        tfSenha = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        cbAtivo = new javax.swing.JComboBox<>();
+        cbSituacao = new javax.swing.JComboBox<>();
+        pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema - Cadastro Usuários");
@@ -92,17 +135,18 @@ public class CadastroUsuarioView extends javax.swing.JFrame{
         tfEmail.setEditable(false);
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("Senha de acesso:");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel18.setText("Senha de acesso:");
+        jLabel18.setText("Situação:");
 
-        cbAtivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-        cbAtivo.setSelectedIndex(-1);
+        cbSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        cbSituacao.setSelectedIndex(-1);
+
+        pfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pfSenha.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,27 +166,27 @@ public class CadastroUsuarioView extends javax.swing.JFrame{
                                 .addGap(594, 594, 594)
                                 .addComponent(btConfirmar))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel18)
+                                .addComponent(jLabel17)
                                 .addGap(18, 18, 18)
-                                .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel16)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel17)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btListarPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btListarPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,19 +205,19 @@ public class CadastroUsuarioView extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(144, 144, 144)
+                    .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(141, 141, 141)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVoltar)
                     .addComponent(btConfirmar))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,16 +233,36 @@ public class CadastroUsuarioView extends javax.swing.JFrame{
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btListarPessoas;
     private javax.swing.JButton btVoltar;
-    private javax.swing.JComboBox<String> cbAtivo;
+    private javax.swing.JComboBox<String> cbSituacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfPessoa;
-    private javax.swing.JTextField tfSenha;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void exibirMensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+
+    @Override
+    public void listarUsuarios(UsuarioTableModel tableModel) {
+        // SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void retornaUsuario(Usuario usuario) {
+        // SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void retornaPessoa(Pessoa pessoa) {
+        tfPessoa.setText(pessoa.getNome());
+        tfEmail.setText(pessoa.getEmail());
+    }
 }

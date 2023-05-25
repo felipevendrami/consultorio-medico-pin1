@@ -4,31 +4,42 @@
  */
 package View.Usuario;
 
+import Controller.Observer.UsuarioObserver;
+import Controller.UsuarioController;
+import Model.Pessoa;
+import Model.Usuario;
+import TableModel.UsuarioTableModel;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author felip
  */
-public class VisualizaUsuarioView extends javax.swing.JFrame{
+public class VisualizaUsuarioView extends javax.swing.JFrame implements UsuarioObserver{
 
     /**
      * Creates new form ConsultaPessoasView
      */
     
+    private UsuarioController usuarioController;
     
-    public VisualizaUsuarioView() {
+    public VisualizaUsuarioView(UsuarioController usuarioController, Long idUsuario) {
         initComponents();
-        
+        this.usuarioController = usuarioController;
+        this.usuarioController.addViewObserver(this);
+        try {
+            this.usuarioController.buscaUsuario(idUsuario);
+        } catch (Exception e) {
+            exibirMensagem(e.getMessage());
+        }
     }
 
     private void addAcoes(){
-        
+        btVoltar.addItemListener(e -> {
+            setVisible(false);
+        });
     }
-    
-    private void validaCampos() throws Exception{
-        
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,10 +56,10 @@ public class VisualizaUsuarioView extends javax.swing.JFrame{
         tfPessoa = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
-        tfSenha = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        cbAtivo = new javax.swing.JComboBox<>();
+        cbSituacao = new javax.swing.JComboBox<>();
+        pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema - Visualizar Usuário");
@@ -75,18 +86,17 @@ public class VisualizaUsuarioView extends javax.swing.JFrame{
         tfEmail.setEditable(false);
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tfSenha.setEditable(false);
-        tfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("Senha de acesso:");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel18.setText("Senha de acesso:");
 
-        cbAtivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-        cbAtivo.setSelectedIndex(-1);
+        cbSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        cbSituacao.setSelectedIndex(-1);
+
+        pfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,7 +118,7 @@ public class VisualizaUsuarioView extends javax.swing.JFrame{
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addGap(18, 18, 18)
-                                .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel16)
@@ -117,7 +127,7 @@ public class VisualizaUsuarioView extends javax.swing.JFrame{
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel17)
                                     .addGap(18, 18, 18)
-                                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel15)
                                     .addGap(18, 18, 18)
@@ -139,17 +149,17 @@ public class VisualizaUsuarioView extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(144, 144, 144)
                 .addComponent(btVoltar)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,16 +173,43 @@ public class VisualizaUsuarioView extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btVoltar;
-    private javax.swing.JComboBox<String> cbAtivo;
+    private javax.swing.JComboBox<String> cbSituacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfPessoa;
-    private javax.swing.JTextField tfSenha;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void exibirMensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+
+    @Override
+    public void listarUsuarios(UsuarioTableModel tableModel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void retornaUsuario(Usuario usuario) {
+        tfPessoa.setText(usuario.getPessoa().getNome());
+        tfEmail.setText(usuario.getPessoa().getEmail());
+        pfSenha.setText(usuario.getSenha());
+        if(usuario.getSituacao().equals("A")){
+            cbSituacao.setSelectedIndex(0);
+        } else {
+            cbSituacao.setSelectedIndex(1);
+        }
+    }
+
+    @Override
+    public void retornaPessoa(Pessoa pessoa) {
+        // SEM IMPLEMENTAÇÃO
+    }
 
 }

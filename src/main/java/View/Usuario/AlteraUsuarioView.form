@@ -48,7 +48,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cbAtivo" min="-2" pref="214" max="-2" attributes="0"/>
+                              <Component id="cbSituacao" min="-2" pref="214" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
@@ -59,7 +59,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tfSenha" min="-2" pref="487" max="-2" attributes="0"/>
+                                  <Component id="pfSenha" min="-2" pref="487" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
@@ -95,22 +95,22 @@
                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pfSenha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbAtivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbSituacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -188,13 +188,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfSenha">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -211,7 +204,7 @@
         <Property name="text" type="java.lang.String" value="Senha de acesso:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbAtivo">
+    <Component class="javax.swing.JComboBox" name="cbSituacao">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -227,6 +220,13 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pfSenha">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

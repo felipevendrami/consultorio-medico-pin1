@@ -4,8 +4,11 @@
  */
 package Controller;
 
+import Controller.Observer.ListObserver;
 import Controller.Observer.UsuarioObserver;
 import DAO.UsuarioDao;
+import Model.Pessoa;
+import Model.Usuario;
 import TableModel.UsuarioTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,24 +17,26 @@ import java.util.List;
  *
  * @author felip
  */
-public class UsuarioController {
+public class UsuarioController implements ListObserver{
     
     private UsuarioDao usuarioDao = new UsuarioDao();
     private List<UsuarioObserver> usuarioView = new ArrayList<>();
     private UsuarioTableModel usuarioTableModel;
+    private Pessoa pessoaSelecionada;
     
     public void addViewObserver(UsuarioObserver obs){
         this.usuarioView.add(obs);
     }
 
-/*    
-    public void gravarPessoa(Pessoa pessoa) throws Exception {
-        pessoaDao.addPessoa(pessoa);
-        for(PessoaObserver view : pessoaView){
-            view.exibirMensagem("Pessoa cadastrada com sucesso !");
-            preencherTabelaPessoa();
+ 
+    public void gravarUsuario(Usuario usuario) throws Exception {
+        usuario.setPessoa(pessoaSelecionada);
+        usuarioDao.addUsuario(usuario);
+        for(UsuarioObserver view : usuarioView){
+            view.exibirMensagem("Usuário cadastrado com sucesso !");
+            preencherTabelaUsuario();
         }
-    }*/
+    }
 
     public void preencherTabelaUsuario() throws Exception {
         List usuarios = usuarioDao.getTodosUsuarios();
@@ -40,29 +45,40 @@ public class UsuarioController {
             view.listarUsuarios(usuarioTableModel);
         }
     }
-    /*
-    public void buscaPessoa(Long idPessoa) throws Exception{
-        Pessoa pessoa = pessoaDao.getPessoa(idPessoa);
-        for(PessoaObserver view : pessoaView){
-            view.retornaPessoa(pessoa);
+    
+    public void buscaUsuario(Long idUsuario) throws Exception{
+        Usuario usuario = usuarioDao.getUsuario(idUsuario);
+        this.pessoaSelecionada = usuario.getPessoa();
+        for(UsuarioObserver view : usuarioView){
+            view.retornaUsuario(usuario);
         }
     }
     
-    public void modificaPessoa(Pessoa pessoaMod) throws Exception{
-        pessoaDao.modifyPessoa(pessoaMod);
-        preencherTabelaPessoa();
-        for(PessoaObserver view : pessoaView){
-            view.exibirMensagem("Pessoa alterada com sucesso !");
+    public void modificaUsuario(Usuario usuarioMod) throws Exception{
+        usuarioMod.setPessoa(pessoaSelecionada);
+        usuarioDao.modifyUsuario(usuarioMod);
+        preencherTabelaUsuario();
+        for(UsuarioObserver view : usuarioView){
+            view.exibirMensagem("Usuário alterada com sucesso !");
         }
     }
     
-    public void excluirPessoa(Long idPessoa) throws Exception{
-        Pessoa pessoa = pessoaDao.getPessoa(idPessoa);
-        pessoaDao.deletePessoa(pessoa);
-        preencherTabelaPessoa();
-        for(PessoaObserver view : pessoaView){
-            view.exibirMensagem("Pessoa excluída com sucesso !");
+    public void excluirUsuario(Long idUsuario) throws Exception{
+        Usuario usuario = usuarioDao.getUsuario(idUsuario);
+        usuarioDao.deleteUsuario(usuario);
+        preencherTabelaUsuario();
+        for(UsuarioObserver view : usuarioView){
+            view.exibirMensagem("Usuario excluído com sucesso !");
         }
     }
-*/
+
+    @Override
+    public void retornaObjeto(Object obj) {
+        if(obj instanceof Pessoa){
+            this.pessoaSelecionada = (Pessoa) obj;
+            for(UsuarioObserver view : usuarioView){
+                view.retornaPessoa(pessoaSelecionada);
+            }
+        }
+    }
 }

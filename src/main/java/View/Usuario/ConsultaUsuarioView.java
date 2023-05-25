@@ -6,8 +6,13 @@ package View.Pessoa;
 
 import Controller.Observer.UsuarioObserver;
 import Controller.UsuarioController;
+import Model.Pessoa;
 import Model.Usuario;
 import TableModel.UsuarioTableModel;
+import View.Usuario.AlteraUsuarioView;
+import View.Usuario.CadastroUsuarioView;
+import View.Usuario.VisualizaUsuarioView;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,25 +30,52 @@ public class ConsultaUsuarioView extends javax.swing.JFrame implements UsuarioOb
             usuarioController.preencherTabelaUsuario();
             addAcoes();
         } catch (Exception e) {
+            exibirMensagem(e.getMessage());
         }
     }
     
     private void addAcoes(){
         btCadastrar.addActionListener(e -> {
-        
+            CadastroUsuarioView cadUsuarioView = new CadastroUsuarioView(usuarioController);
+            cadUsuarioView.setVisible(true);
         });
         btAlterar.addActionListener(e -> {
-        
+            try {
+                AlteraUsuarioView alteraUsuarioView = new AlteraUsuarioView(usuarioController, getIdUsuario());
+                alteraUsuarioView.setVisible(true);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btVisualizar.addActionListener(e -> {
-        
+            try {
+                VisualizaUsuarioView visualizaUsuarioView = new VisualizaUsuarioView(usuarioController, getIdUsuario());
+                visualizaUsuarioView.setVisible(true);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btDeletar.addActionListener(e -> {
-        
+            try {
+                int opcao = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar o Usuário selecionado ?", "Pergunta", 0);
+                if(opcao == 0){
+                    this.usuarioController.excluirUsuario(getIdUsuario());
+                }
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btVoltar.addActionListener(e -> {
             setVisible(false);
         });
+    }
+    
+    public Long getIdUsuario() throws Exception{
+        if(tbUsuarios.getSelectedRow() == -1){
+            throw new Exception("Nenhuma linha selecionada");
+        } else {
+            return Long.parseLong(tbUsuarios.getModel().getValueAt(tbUsuarios.getSelectedRow(), 0).toString());
+        }
     }
     
     /**
@@ -84,6 +116,7 @@ public class ConsultaUsuarioView extends javax.swing.JFrame implements UsuarioOb
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbUsuarios);
 
         btCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -161,7 +194,7 @@ public class ConsultaUsuarioView extends javax.swing.JFrame implements UsuarioOb
 
     @Override
     public void exibirMensagem(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
@@ -171,7 +204,11 @@ public class ConsultaUsuarioView extends javax.swing.JFrame implements UsuarioOb
 
     @Override
     public void retornaUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //SEM IMPLEMENTAÇÃO
     }
 
+    @Override
+    public void retornaPessoa(Pessoa pessoa) {
+        // SEM IMPLEMENTAÇÃO
+    }
 }

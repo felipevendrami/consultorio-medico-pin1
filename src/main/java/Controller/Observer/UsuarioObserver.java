@@ -4,6 +4,7 @@
  */
 package Controller.Observer;
 
+import Model.Pessoa;
 import Model.Usuario;
 import TableModel.UsuarioTableModel;
 
@@ -11,10 +12,11 @@ import TableModel.UsuarioTableModel;
  *
  * @author felip
  */
-public interface UsuarioObserver {
+public interface UsuarioObserver{
     
     void exibirMensagem(String msg);
     void listarUsuarios(UsuarioTableModel tableModel);
     void retornaUsuario(Usuario usuario);
+    void retornaPessoa(Pessoa pessoa);
     
 }

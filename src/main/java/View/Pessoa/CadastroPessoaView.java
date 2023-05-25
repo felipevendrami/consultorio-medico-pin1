@@ -29,7 +29,6 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         initComponents();
         this.pessoaController = pessoaController;
         addAcoes();
-        
     }
 
     private void addAcoes(){
@@ -58,7 +57,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
             throw new Exception("Campo \"Nome\" é obrigatório.");
         } else if (tfCpf.getText().isBlank()){
             throw new Exception("Campo \"CPF\" é obrigatório.");
-        } else if (cbGenero.getSelectedItem().equals(null)){
+        } else if (cbGenero.getSelectedIndex() == -1){
             throw new Exception("Selecione o campo \"Gênero\".");
         } else if (tfContato.getText().isBlank()){
             throw new Exception("Campo \"Contato\" é obrigatório.");

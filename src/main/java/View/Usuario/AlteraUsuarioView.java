@@ -4,29 +4,78 @@
  */
 package View.Usuario;
 
+import Controller.Observer.UsuarioObserver;
+import Controller.UsuarioController;
+import Model.Pessoa;
+import Model.Usuario;
+import TableModel.UsuarioTableModel;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author felip
  */
-public class AlteraUsuarioView extends javax.swing.JFrame{
+public class AlteraUsuarioView extends javax.swing.JFrame implements UsuarioObserver{
 
     /**
      * Creates new form ConsultaPessoasView
      */
     
+    private UsuarioController usuarioController;
     
-    public AlteraUsuarioView() {
+    public AlteraUsuarioView(UsuarioController usuarioController, Long idUsuario) {
         initComponents();
-        
+        this.usuarioController = usuarioController;
+        this.usuarioController.addViewObserver(this);
+        try {
+            this.usuarioController.buscaUsuario(idUsuario);
+        } catch (Exception e) {
+            exibirMensagem(e.getMessage());
+        }
+        addAcoes();
     }
 
     private void addAcoes(){
-        
+        btConfirmar.addActionListener(e -> {
+            try {
+                validaCampos();
+                usuarioController.modificaUsuario(montaUsuario());
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
+        });
+        btVoltar.addActionListener(e -> {
+            setVisible(false);
+        });
+    }
+    
+    private Usuario montaUsuario() {
+        Usuario usuario = new Usuario(null, pfSenha.getText(), getSituacao());
+        return usuario;
+    }
+    
+    private String getSituacao(){
+        String situacao = cbSituacao.getItemAt(cbSituacao.getSelectedIndex());
+        if(situacao.equals("Ativo")){
+            return "A";
+        } else {
+            return "I";
+        }
     }
     
     private void validaCampos() throws Exception{
-        
+        if(tfPessoa.getText().isBlank()){
+            throw new Exception("Você precisa selecionar uma Pessoa para prosseguir.");
+        } else if (tfEmail.getText().isBlank()){
+            throw new Exception("É preciso que a pessoa selecionada possua \"E-mail\" cadastrado.");
+        } else if (pfSenha.getText().isBlank()){
+            throw new Exception("Campo \"Senha\" é obrigatório.");
+        } else if (pfSenha.getText().length() < 6){
+            throw new Exception("Campo \"Senha\" não pode ter menos de 6 caractéres.");
+        } else if (cbSituacao.getSelectedIndex() == -1){
+            throw new Exception("Seleciona o campo \"Situação\".");
+        }
     }
     
     /**
@@ -47,10 +96,10 @@ public class AlteraUsuarioView extends javax.swing.JFrame{
         btListarPessoas = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
-        tfSenha = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        cbAtivo = new javax.swing.JComboBox<>();
+        cbSituacao = new javax.swing.JComboBox<>();
+        pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema - Alterar Usuário");
@@ -83,17 +132,17 @@ public class AlteraUsuarioView extends javax.swing.JFrame{
         tfEmail.setEditable(false);
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("Senha de acesso:");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel18.setText("Senha de acesso:");
 
-        cbAtivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-        cbAtivo.setSelectedIndex(-1);
+        cbSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        cbSituacao.setSelectedIndex(-1);
+
+        pfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +167,7 @@ public class AlteraUsuarioView extends javax.swing.JFrame{
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addGap(18, 18, 18)
-                                .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel16)
@@ -127,7 +176,7 @@ public class AlteraUsuarioView extends javax.swing.JFrame{
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel17)
                                     .addGap(18, 18, 18)
-                                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel15)
                                     .addGap(18, 18, 18)
@@ -152,19 +201,19 @@ public class AlteraUsuarioView extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVoltar)
                     .addComponent(btConfirmar))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,16 +229,43 @@ public class AlteraUsuarioView extends javax.swing.JFrame{
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btListarPessoas;
     private javax.swing.JButton btVoltar;
-    private javax.swing.JComboBox<String> cbAtivo;
+    private javax.swing.JComboBox<String> cbSituacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField pfSenha;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfPessoa;
-    private javax.swing.JTextField tfSenha;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void exibirMensagem(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+
+    @Override
+    public void listarUsuarios(UsuarioTableModel tableModel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void retornaUsuario(Usuario usuario) {
+        tfPessoa.setText(usuario.getPessoa().getNome());
+        tfEmail.setText(usuario.getPessoa().getEmail());
+        pfSenha.setText(usuario.getSenha());
+        if(usuario.getSituacao().equals("A")){
+            cbSituacao.setSelectedIndex(0);
+        } else {
+            cbSituacao.setSelectedIndex(1);
+        }
+    }
+
+    @Override
+    public void retornaPessoa(Pessoa pessoa) {
+        // SEM IMPLEMENTAÇÃO
+    }
 
 }

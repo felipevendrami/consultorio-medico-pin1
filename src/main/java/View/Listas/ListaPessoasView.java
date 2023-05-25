@@ -2,68 +2,51 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.Pessoa;
+package View.Listas;
 
 import Controller.Observer.PessoaObserver;
 import Controller.PessoaController;
 import Model.Pessoa;
 import TableModel.PessoaTableModel;
 import javax.swing.JOptionPane;
+import Controller.Observer.ListObserver;
 
 /**
  *
  * @author felip
  */
-public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObserver{
+public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserver{
 
     private PessoaController pessoaController;
-    
-    public ConsultaPessoaView() {
+    private ListObserver controllerRetorno;
+     
+    public ListaPessoasView(ListObserver viewRetorno) {
         initComponents();
         this.pessoaController = new PessoaController();
-        pessoaController.addViewObserver(this);
+        this.pessoaController.addViewObserver(this);
+        this.controllerRetorno = viewRetorno;
         try {
             pessoaController.preencherTabelaPessoa();
             addAcoes();
-        } catch (Exception e) {
+       } catch (Exception e) {
             exibirMensagem(e.getMessage());
         }
     }
     
     private void addAcoes(){
-        btCadastrar.addActionListener(e -> {
-            CadastroPessoaView cadPessoaView = new CadastroPessoaView(pessoaController);
-            cadPessoaView.setVisible(true);
-        });
-        btAlterar.addActionListener(e -> {
+        btSelecionar.addActionListener(e ->{
             try {
-                AlteraPessoaView alteraPessoaView = new AlteraPessoaView(pessoaController, getIdPessoa());
-                alteraPessoaView.setVisible(true);
+                this.pessoaController.buscaPessoa(getIdPessoa());
+                this.setVisible(false);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
-        btVisualizar.addActionListener(e -> {
-            try {
-                VisualizaPessoaView visualizaPessoaView = new VisualizaPessoaView(pessoaController, getIdPessoa());
-                visualizaPessoaView.setVisible(true);
-            } catch (Exception ex) {
-                exibirMensagem(ex.getMessage());
-            }
+        btFechar.addActionListener(e -> {
+            setVisible(false);
         });
-        btDeletar.addActionListener(e -> {
-            try {
-                int opcao = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar a pessoa selecionada ?", "Pergunta", 0);
-                if(opcao == 0){
-                    this.pessoaController.excluirPessoa(getIdPessoa());
-                }
-            } catch (Exception ex) {
-                exibirMensagem(ex.getMessage());
-            }
-        });
-        btVoltar.addActionListener(e -> setVisible(false));
     }
-
+    
     public Long getIdPessoa() throws Exception{
         if(tbPessoas.getSelectedRow() == -1){
             throw new Exception("Nenhuma linha selecionada");
@@ -84,15 +67,13 @@ public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObse
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPessoas = new javax.swing.JTable();
-        btCadastrar = new javax.swing.JButton();
-        btAlterar = new javax.swing.JButton();
-        btVisualizar = new javax.swing.JButton();
-        btDeletar = new javax.swing.JButton();
-        btVoltar = new javax.swing.JButton();
+        btFechar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Sistema - Consulta Pessoas");
-        setMinimumSize(new java.awt.Dimension(800, 500));
+        setTitle("Sistema - Lista de Pessoas");
+        setMinimumSize(new java.awt.Dimension(430, 500));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -110,23 +91,16 @@ public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObse
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbPessoas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbPessoas);
 
-        btCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btCadastrar.setText("Cadastrar");
+        btFechar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btFechar.setText("Fechar");
 
-        btAlterar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btAlterar.setText("Alterar");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("> Lista de Pessoas");
 
-        btVisualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btVisualizar.setText("Visualizar");
-
-        btDeletar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btDeletar.setText("Deletar");
-
-        btVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btVoltar.setText("Voltar");
+        btSelecionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btSelecionar.setText("Selecionar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,35 +109,32 @@ public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObse
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btVoltar)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btCadastrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAlterar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVisualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btDeletar))
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btFechar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btSelecionar))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCadastrar)
-                    .addComponent(btAlterar)
-                    .addComponent(btVisualizar)
-                    .addComponent(btDeletar))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btVoltar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btFechar)
+                    .addComponent(btSelecionar))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -176,17 +147,14 @@ public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObse
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btCadastrar;
-    private javax.swing.JButton btDeletar;
-    private javax.swing.JButton btVisualizar;
-    private javax.swing.JButton btVoltar;
+    private javax.swing.JButton btFechar;
+    private javax.swing.JButton btSelecionar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbPessoas;
     // End of variables declaration//GEN-END:variables
 
-    @Override
     public void exibirMensagem(String msg) {
         JOptionPane.showMessageDialog(null, msg);
     }
@@ -197,7 +165,7 @@ public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObse
     }
 
     @Override
-    public void retornaPessoa(Pessoa pessoa){
-        // SEM IMPLEMENTAÇÃO
+    public void retornaPessoa(Pessoa pessoa) {
+       this.controllerRetorno.retornaObjeto(pessoa);
     }
 }
