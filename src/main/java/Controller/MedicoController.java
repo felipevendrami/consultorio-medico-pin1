@@ -23,6 +23,7 @@ public class MedicoController  implements ListObserver{
     private List<MedicoObserver> medicoView = new ArrayList<>();
     private MedicoTableModel medicoTableModel;
     private Pessoa pessoaSelecionada;
+    private Medico ModelMedico;
 
     public void addViewObserver(MedicoObserver obs) {
         this.medicoView.add(obs);
@@ -46,15 +47,16 @@ public class MedicoController  implements ListObserver{
     }
     
     public void buscaMedico(Long idMedico) throws Exception{
-        Medico medico = medicoDao.getMedico(idMedico);
-        this.pessoaSelecionada = medico.getPessoa();
+        ModelMedico = medicoDao.getMedico(idMedico);
+        this.pessoaSelecionada = ModelMedico.getPessoa();
         for(MedicoObserver view : medicoView){
-            view.retornaMedico(medico);
+            view.retornaMedico(ModelMedico);
         }
     }
     
     public void modificaMedico(Medico medicoMod) throws Exception{
         medicoMod.setPessoa(pessoaSelecionada);
+        medicoMod.setIdMedico(ModelMedico.getIdMedico());
         medicoDao.modifyMedico(medicoMod);
         preencherTabelaMedico();
         for(MedicoObserver view : medicoView){
