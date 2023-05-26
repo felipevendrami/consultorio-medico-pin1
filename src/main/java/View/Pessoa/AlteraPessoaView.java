@@ -37,24 +37,16 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
     }
 
     private void addAcoes() {
-        btConfirmar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    validaCampos();
-                    pessoaController.modificaPessoa(montaPessoa());
-                    setVisible(false);
-                } catch (Exception ex) {
-                    exibirMensagem(ex.getMessage());
-                }
-            }
-        });
-        btVoltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btConfirmar.addActionListener(e -> {
+            try {
+                validaCampos();
+                pessoaController.modificaPessoa(montaPessoa());
                 setVisible(false);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
             }
         });
+        btVoltar.addActionListener(e -> setVisible(false));
     }
 
     private void validaCampos() throws Exception {
@@ -74,6 +66,8 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
             throw new Exception("Campo \"Cidade\" é obrigatório.");
         } else if (tfUf.getText().isBlank()) {
             throw new Exception("Campo \"UF\" é obrigatório.");
+        } else if (tfLogradouro.getText().isBlank()) {
+            throw new Exception("Campo \"Logradouro\" é obrigatório.");
         }
     }
 
@@ -83,8 +77,7 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
     }
 
     private Endereco montaEndereco() {
-        Endereco endereco = new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText());
-        return endereco;
+        return new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText(), tfLogradouro.getText());
     }
 
     private String getGenero() {
@@ -457,5 +450,6 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
         tfCidade.setText(pessoa.getEndereco().getCidade());
         tfNumero.setText(pessoa.getEndereco().getNumero().toString());
         tfUf.setText(pessoa.getEndereco().getUf());
+        tfLogradouro.setText(pessoa.getEndereco().getLogradouro());
     }
 }

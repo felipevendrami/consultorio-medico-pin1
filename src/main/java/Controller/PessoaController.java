@@ -20,6 +20,7 @@ public class PessoaController {
     private PessoaDao pessoaDao = new PessoaDao();
     private List<PessoaObserver> pessoaView = new ArrayList<>();
     private PessoaTableModel pessoaTableModel;
+    private Pessoa ModelPessoa;
 
     public void addViewObserver(PessoaObserver obs) {
         this.pessoaView.add(obs);
@@ -42,13 +43,15 @@ public class PessoaController {
     }
     
     public void buscaPessoa(Long idPessoa) throws Exception{
-        Pessoa pessoa = pessoaDao.getPessoa(idPessoa);
+        ModelPessoa = pessoaDao.getPessoa(idPessoa);
         for(PessoaObserver view : pessoaView){
-            view.retornaPessoa(pessoa);
+            view.retornaPessoa(ModelPessoa);
         }
     }
     
     public void modificaPessoa(Pessoa pessoaMod) throws Exception{
+        pessoaMod.setId(ModelPessoa.getId());
+        pessoaMod.getEndereco().setId(ModelPessoa.getEndereco().getId());
         pessoaDao.modifyPessoa(pessoaMod);
         preencherTabelaPessoa();
         for(PessoaObserver view : pessoaView){

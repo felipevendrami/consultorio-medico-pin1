@@ -80,8 +80,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
     }
     
     private Endereco montaEndereco(){
-        Endereco endereco = new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText());
-        return endereco;
+        return new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText(), tfLogradouro.getText());
     }
     
     private String getGenero(){

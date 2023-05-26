@@ -46,11 +46,8 @@ public class PessoaDao extends AcessoBD {
     
     public void modifyPessoa(Pessoa pessoaMod) throws Exception{
         try {
-            
-            Pessoa pessoa = getPessoa(pessoaMod.getId());
-            pessoa = pessoaMod;
             entityManager.getTransaction().begin();
-            entityManager.merge(pessoa);
+            entityManager.merge(pessoaMod);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e.getMessage());

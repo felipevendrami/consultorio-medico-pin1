@@ -404,5 +404,6 @@ public class VisualizaPessoaView extends javax.swing.JFrame implements PessoaObs
         tfCidade.setText(pessoa.getEndereco().getCidade());
         tfNumero.setText(pessoa.getEndereco().getNumero().toString());
         tfUf.setText(pessoa.getEndereco().getUf());
+        tfLogradouro.setText(pessoa.getEndereco().getLogradouro());
     }
 }
