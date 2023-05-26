@@ -44,7 +44,7 @@ public class MedicoTableModel extends AbstractTableModel{
         Medico medico = this.medicos.get(rowIndex);
         return switch (columnIndex) {
             case COLUNA_ID -> String.valueOf(medico.getIdMedico());
-            case COLUNA_PESSOA -> String.valueOf(medico.getPessoa());
+            case COLUNA_PESSOA -> String.valueOf(medico.getPessoa().getNome());
             case COLUNA_CRM -> String.valueOf(medico.getCrm());
             default -> null;
         };

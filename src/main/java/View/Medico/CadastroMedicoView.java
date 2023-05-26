@@ -81,7 +81,7 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
     
     private Medico montaMedico(){
         Date dataAtual = new Date();
-        Medico medico = new Medico(null, null, tfCrm.getText(), dataAtual , tfSituacao.getText());
+        Medico medico = new Medico(null, tfCrm.getText(), dataAtual , tfSituacao.getText());
         return medico;
     }
     

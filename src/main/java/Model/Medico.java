@@ -41,7 +41,7 @@ public class Medico {
 
     public Medico() {}
 
-    public Medico(Pessoa pessoa, Especialidade especialidade, String crm, Date dataInscricao, String situacao) {
+    public Medico(Pessoa pessoa, String crm, Date dataInscricao, String situacao) {
         this.pessoa = pessoa;
         this.especialidade = especialidade;
         this.crm = crm;

@@ -200,4 +200,9 @@ public class ConsultaPessoaView extends javax.swing.JFrame implements PessoaObse
     public void retornaPessoa(Pessoa pessoa){
         // SEM IMPLEMENTAÇÃO
     }
+
+    @Override
+    public void exibirMensagemConfirmacao(String msg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -452,4 +452,9 @@ public class AlteraPessoaView extends javax.swing.JFrame implements PessoaObserv
         tfUf.setText(pessoa.getEndereco().getUf());
         tfLogradouro.setText(pessoa.getEndereco().getLogradouro());
     }
+
+    @Override
+    public void exibirMensagemConfirmacao(String msg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

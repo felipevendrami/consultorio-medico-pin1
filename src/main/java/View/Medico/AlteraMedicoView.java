@@ -13,6 +13,7 @@ import Model.Pessoa;
 import TableModel.MedicoTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,9 +52,6 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
                 }
             }
 
-            private Medico montaMedico() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
         });
         btVoltar.addActionListener(new ActionListener() {
             @Override
@@ -63,30 +61,35 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
         });
     }
 
-    private void validaCampos() throws Exception{
-        if(tfPessoa.getText().isBlank()){
+    private Medico montaMedico() {
+        Date dataAtual = new Date();
+        Medico medico = new Medico(null, tfCrm.getText(), dataAtual , tfSituacao.getText());
+        return medico;
+    }
+
+    private void validaCampos() throws Exception {
+        if (tfPessoa.getText().isBlank()) {
             throw new Exception("Campo \"Pessoa\" é obrigatório.");
-        } else if (tfEspecialidade.getText().isBlank()){
+        } else if (tfEspecialidade.getText().isBlank()) {
             throw new Exception("Campo \"Especialidade\" é obrigatório.");
-        } else if (tfCrm.getText().isBlank()){
+        } else if (tfCrm.getText().isBlank()) {
             throw new Exception("Selecione o campo \"CRM\".");
-        } else if (tfDataInscricao.getText().isBlank()){
+        } else if (tfDataInscricao.getText().isBlank()) {
             throw new Exception("Campo \"Data de Inscrição\" é obrigatório.");
-        } else if (tfSituacao.getText().isBlank()){
+        } else if (tfSituacao.getText().isBlank()) {
             throw new Exception("Campo \"Situação\" é obrigatório.");
-        } else if (tfSenhaAcesso.getText().isBlank()){
+        } else if (tfSenhaAcesso.getText().isBlank()) {
             throw new Exception("Campo \"Senha de Acesso\" é obrigatório.");
         }
     }
 
-   // private Medico montaMedico() {
-        //Medico medico = new Medico(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
-        //return medico;
+    // private Medico montaMedico() {
+    //Medico medico = new Medico(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
+    //return medico;
     //}
-
     @Override
     public void exibirMensagem(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
@@ -96,15 +99,17 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
 
     @Override
     public void retornaMedico(Medico medico) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        tfPessoa.setText(medico.getPessoa().getNome());
+        tfEspecialidade.setText(medico.getEspecialidade().getDescricao());
+        tfCrm.setText(medico.getCrm());
+        tfDataInscricao.setText(medico.getDataInscricao().toString());
+        tfSituacao.setText(medico.getSituacao());
     }
 
     @Override
     public void retornaPessoa(Pessoa pessoa) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -316,5 +321,4 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
     private javax.swing.JTextField tfSituacao;
     // End of variables declaration//GEN-END:variables
 
- 
 }

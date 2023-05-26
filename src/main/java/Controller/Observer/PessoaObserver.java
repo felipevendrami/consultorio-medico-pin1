@@ -14,6 +14,7 @@ import TableModel.PessoaTableModel;
 public interface PessoaObserver{
     
     void exibirMensagem(String msg);
+    void exibirMensagemConfirmacao(String msg);
     void listarPessoas(PessoaTableModel tableModel);
     void retornaPessoa(Pessoa pessoa);
     
