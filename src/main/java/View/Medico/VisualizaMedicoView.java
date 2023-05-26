@@ -16,14 +16,13 @@ import javax.swing.JOptionPane;
  *
  * @author felip
  */
-public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObserver{
+public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObserver {
 
     /**
      * Creates new form ConsultaMedicosView
      */
-    
     private MedicoController medicoController;
-    
+
     public VisualizaMedicoView(MedicoController medicoController, Long idMedico) {
         initComponents();
         this.medicoController = medicoController;
@@ -36,12 +35,12 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
         addAcoes();
     }
 
-    private void addAcoes(){
+    private void addAcoes() {
         btVoltar.addActionListener(e -> {
             setVisible(false);
         });
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,37 +56,25 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jpGeral = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        tfNome = new javax.swing.JTextField();
-        tfCpf = new javax.swing.JTextField();
+        tfPessoa = new javax.swing.JTextField();
+        tfEspecialidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cbGenero = new javax.swing.JComboBox<>();
-        tfEmail = new javax.swing.JTextField();
+        tfDataInscricao = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        tfContato = new javax.swing.JTextField();
-        jpEndereco = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        tfCep = new javax.swing.JTextField();
-        tfLogradouro = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        tfBairro = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        tfComplemento = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        tfCidade = new javax.swing.JTextField();
-        tfNumero = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        tfUf = new javax.swing.JTextField();
+        tfSituacao = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        tfSenhaAcesso = new javax.swing.JTextField();
+        tfCrm = new javax.swing.JTextField();
+        btListarPessoas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema - Visualizar Pessoa");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Pessoas");
+        jLabel1.setText("Médico");
 
         btVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btVoltar.setText("Voltar");
@@ -97,63 +84,70 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jpGeral.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        jpGeral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jpGeral.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Pessoa:");
 
-        tfNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfNome.setEnabled(false);
+        tfPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        tfCpf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfCpf.setEnabled(false);
+        tfEspecialidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("CPF:");
+        jLabel4.setText("Especialidade:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Gênero:");
+        jLabel5.setText("CRM:");
 
-        cbGenero.setEditable(true);
-        cbGenero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", " " }));
-        cbGenero.setSelectedIndex(-1);
-        cbGenero.setToolTipText("");
-        cbGenero.setEnabled(false);
-
-        tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfEmail.setEnabled(false);
+        tfDataInscricao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("E-mail:");
+        jLabel6.setText("Data de Inscrição:");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Contato:");
+        jLabel7.setText("Situação:");
 
-        tfContato.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfContato.setEnabled(false);
+        tfSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setText("Senha de Acesso:");
+
+        tfSenhaAcesso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        tfCrm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        btListarPessoas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btListarPessoas.setText("Lista");
 
         javax.swing.GroupLayout jpGeralLayout = new javax.swing.GroupLayout(jpGeral);
         jpGeral.setLayout(jpGeralLayout);
         jpGeralLayout.setHorizontalGroup(
             jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpGeralLayout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
-                .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(tfContato, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCpf, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbGenero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(123, 123, 123))
+                .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpGeralLayout.createSequentialGroup()
+                        .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfSituacao, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                            .addComponent(tfEspecialidade, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfDataInscricao, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSenhaAcesso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                            .addComponent(tfCrm, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(123, 123, 123))
+                    .addGroup(jpGeralLayout.createSequentialGroup()
+                        .addComponent(tfPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btListarPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109))))
         );
         jpGeralLayout.setVerticalGroup(
             jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,151 +155,32 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
                 .addGap(34, 34, 34)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(tfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btListarPessoas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(tfEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(cbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(tfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(tfDataInscricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(tfContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                    .addComponent(tfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(tfSenhaAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Geral", jpGeral);
-
-        jpEndereco.setBorder(javax.swing.BorderFactory.createLineBorder(null));
-        jpEndereco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("CEP:");
-
-        tfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfCep.setEnabled(false);
-
-        tfLogradouro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfLogradouro.setEnabled(false);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Logradouro:");
-
-        tfBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfBairro.setEnabled(false);
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("Bairro:");
-
-        tfComplemento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfComplemento.setEnabled(false);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("Complemento:");
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setText("Cidade:");
-
-        tfCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfCidade.setEnabled(false);
-
-        tfNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfNumero.setEnabled(false);
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setText("Número:");
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setText("UF:");
-
-        tfUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tfUf.setEnabled(false);
-
-        javax.swing.GroupLayout jpEnderecoLayout = new javax.swing.GroupLayout(jpEndereco);
-        jpEndereco.setLayout(jpEnderecoLayout);
-        jpEnderecoLayout.setHorizontalGroup(
-            jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(72, 72, 72))
-            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jpEnderecoLayout.setVerticalGroup(
-            jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(tfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14)
-                        .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel12)
-                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Endereço", jpEndereco);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -318,10 +193,13 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(btVoltar))
+                .addContainerGap(574, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(22, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,11 +208,14 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(408, 408, 408)
                 .addComponent(btVoltar)
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(64, 64, 64)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(64, Short.MAX_VALUE)))
         );
 
         pack();
@@ -345,38 +226,25 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btListarPessoas;
     private javax.swing.JButton btVoltar;
-    private javax.swing.JComboBox<String> cbGenero;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JPanel jpEndereco;
     private javax.swing.JPanel jpGeral;
-    private javax.swing.JTextField tfBairro;
-    private javax.swing.JTextField tfCep;
-    private javax.swing.JTextField tfCidade;
-    private javax.swing.JTextField tfComplemento;
-    private javax.swing.JTextField tfContato;
-    private javax.swing.JTextField tfCpf;
-    private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfLogradouro;
-    private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfNumero;
-    private javax.swing.JTextField tfUf;
+    private javax.swing.JTextField tfCrm;
+    private javax.swing.JTextField tfDataInscricao;
+    private javax.swing.JTextField tfEspecialidade;
+    private javax.swing.JTextField tfPessoa;
+    private javax.swing.JTextField tfSenhaAcesso;
+    private javax.swing.JTextField tfSituacao;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -391,11 +259,15 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
 
     @Override
     public void retornaMedico(Medico medico) {
-    
+        tfPessoa.setText(medico.getPessoa().getNome());
+        tfEspecialidade.setText(medico.getEspecialidade().getDescricao());
+        tfCrm.setText(medico.getCrm());
+        tfDataInscricao.setText(medico.getDataInscricao().toString());
+        tfSituacao.setText(medico.getSituacao());
     }
 
     @Override
     public void retornaPessoa(Pessoa pessoa) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // SEM IMPL
     }
 }

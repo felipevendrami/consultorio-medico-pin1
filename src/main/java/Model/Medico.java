@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.Date;
+import javax.persistence.JoinColumn;
 
 /**
  * @author renan
@@ -23,7 +24,7 @@ public class Medico {
     private Long idMedico;
 
     @OneToOne
-    @PrimaryKeyJoinColumn(name = "id_pessoa")
+    @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
     @OneToOne
@@ -43,7 +44,6 @@ public class Medico {
 
     public Medico(Pessoa pessoa, String crm, Date dataInscricao, String situacao) {
         this.pessoa = pessoa;
-        this.especialidade = especialidade;
         this.crm = crm;
         this.dataInscricao = dataInscricao;
         this.situacao = situacao;

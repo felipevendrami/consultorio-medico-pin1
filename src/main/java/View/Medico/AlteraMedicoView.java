@@ -94,7 +94,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
 
     @Override
     public void listarMedicos(MedicoTableModel tableModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // SEM IMPLEMENTAÇÃO
     }
 
     @Override
@@ -103,7 +103,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
         tfEspecialidade.setText(medico.getEspecialidade().getDescricao());
         tfCrm.setText(medico.getCrm());
         tfDataInscricao.setText(medico.getDataInscricao().toString());
-        tfSituacao.setText(medico.getSituacao());
+        tfSituacao.setText(medico.getSituacao());   
     }
 
     @Override
