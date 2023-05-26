@@ -135,6 +135,7 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Pessoa:");
 
+        tfPessoa.setEditable(false);
         tfPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         tfEspecialidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

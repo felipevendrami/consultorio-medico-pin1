@@ -41,6 +41,7 @@ public class AlteraUsuarioView extends javax.swing.JFrame implements UsuarioObse
             try {
                 validaCampos();
                 usuarioController.modificaUsuario(montaUsuario());
+                setVisible(false);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
@@ -248,7 +249,7 @@ public class AlteraUsuarioView extends javax.swing.JFrame implements UsuarioObse
 
     @Override
     public void listarUsuarios(UsuarioTableModel tableModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // SEM IMPLEMENTAÇÃO
     }
 
     @Override

@@ -21,7 +21,7 @@ public class MedicoDao extends AcessoBD {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new Exception("Ocorreu algum erro durante o cadastro do usuário.");
+            throw new Exception("Ocorreu algum erro durante o cadastro do médico.");
         }
     }
 
@@ -54,7 +54,7 @@ public class MedicoDao extends AcessoBD {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            throw new Exception("Ocorreu um problema na alteração da medico.");
+            throw new Exception("Ocorreu um problema na alteração da médico.");
         }
     }
 
@@ -64,7 +64,7 @@ public class MedicoDao extends AcessoBD {
             entityManager.remove(medico);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            throw new Exception("Ocorre um problema durante a exclusão da medico.");
+            throw new Exception("Ocorre um problema durante a exclusão da médico.");
         }
     }
     

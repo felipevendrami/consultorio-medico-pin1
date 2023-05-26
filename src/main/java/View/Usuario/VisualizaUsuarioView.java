@@ -96,6 +96,7 @@ public class VisualizaUsuarioView extends javax.swing.JFrame implements UsuarioO
         cbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
         cbSituacao.setSelectedIndex(-1);
 
+        pfSenha.setEditable(false);
         pfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,7 +193,7 @@ public class VisualizaUsuarioView extends javax.swing.JFrame implements UsuarioO
 
     @Override
     public void listarUsuarios(UsuarioTableModel tableModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // SEM IMPLEMENTAÇÃO
     }
 
     @Override

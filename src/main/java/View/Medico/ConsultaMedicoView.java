@@ -112,6 +112,7 @@ public class ConsultaMedicoView extends javax.swing.JFrame implements MedicoObse
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbMedicos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbMedicos);
 
         btCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -204,6 +205,6 @@ public class ConsultaMedicoView extends javax.swing.JFrame implements MedicoObse
 
     @Override
     public void retornaPessoa(Pessoa pessoa) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // SEM IMPLEMENTAÇÃO
     }
 }

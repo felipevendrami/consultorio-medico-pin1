@@ -23,6 +23,7 @@ public class UsuarioController implements ListObserver{
     private List<UsuarioObserver> usuarioView = new ArrayList<>();
     private UsuarioTableModel usuarioTableModel;
     private Pessoa pessoaSelecionada;
+    private Usuario ModelUsuario;
     
     public void addViewObserver(UsuarioObserver obs){
         this.usuarioView.add(obs);
@@ -47,19 +48,22 @@ public class UsuarioController implements ListObserver{
     }
     
     public void buscaUsuario(Long idUsuario) throws Exception{
-        Usuario usuario = usuarioDao.getUsuario(idUsuario);
-        this.pessoaSelecionada = usuario.getPessoa();
+        ModelUsuario = usuarioDao.getUsuario(idUsuario);
+        //Usuario usuario = usuarioDao.getUsuario(idUsuario);
+        this.pessoaSelecionada = ModelUsuario.getPessoa();
         for(UsuarioObserver view : usuarioView){
-            view.retornaUsuario(usuario);
+            view.retornaUsuario(ModelUsuario);
         }
     }
     
     public void modificaUsuario(Usuario usuarioMod) throws Exception{
         usuarioMod.setPessoa(pessoaSelecionada);
+        usuarioMod.setIdUsuario(ModelUsuario.getIdUsuario());
+        usuarioMod.getPessoa().setId(ModelUsuario.getPessoa().getId());
         usuarioDao.modifyUsuario(usuarioMod);
         preencherTabelaUsuario();
         for(UsuarioObserver view : usuarioView){
-            view.exibirMensagem("Usuário alterada com sucesso !");
+            view.exibirMensagem("Usuário alterado com sucesso !");
         }
     }
     
