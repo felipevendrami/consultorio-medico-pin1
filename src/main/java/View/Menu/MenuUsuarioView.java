@@ -4,6 +4,7 @@
  */
 package View.Menu;
 
+import View.Medico.ConsultaMedicoView;
 import View.Pessoa.ConsultaPessoaView;
 import View.Pessoa.ConsultaUsuarioView;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,11 @@ public class MenuUsuarioView extends javax.swing.JFrame {
             ConsultaUsuarioView consultaUsuarioView = new ConsultaUsuarioView();
             consultaUsuarioView.setVisible(true);
         });
+        btMedicos.addActionListener(e -> {
+            ConsultaMedicoView consultaMedicoView = new ConsultaMedicoView();
+            consultaMedicoView.setVisible(true);
+        });
+        
     }
 
     /**
