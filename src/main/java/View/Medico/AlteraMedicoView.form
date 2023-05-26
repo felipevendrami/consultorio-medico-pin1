@@ -135,20 +135,20 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="tfSituacao" alignment="1" pref="439" max="32767" attributes="0"/>
-                                  <Component id="tfEspecialidade" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfDataInscricao" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfSenhaAcesso" alignment="0" pref="439" max="32767" attributes="0"/>
-                                  <Component id="tfCrm" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="tfPessoa" pref="353" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btListarPessoas" min="-2" pref="94" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tfSituacao" alignment="1" pref="439" max="32767" attributes="0"/>
+                                  <Component id="tfEspecialidade" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfDataInscricao" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfCrm" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfSenha" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="123" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -186,9 +186,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfSenhaAcesso" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -270,13 +270,6 @@
                 <Property name="text" type="java.lang.String" value="Senha de Acesso:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfSenhaAcesso">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="tfCrm">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -290,6 +283,13 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="tfSenha">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

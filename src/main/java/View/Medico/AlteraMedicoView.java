@@ -78,7 +78,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
             throw new Exception("Campo \"Data de Inscrição\" é obrigatório.");
         } else if (tfSituacao.getText().isBlank()) {
             throw new Exception("Campo \"Situação\" é obrigatório.");
-        } else if (tfSenhaAcesso.getText().isBlank()) {
+        } else if (tfSenha.getText().isBlank()) {
             throw new Exception("Campo \"Senha de Acesso\" é obrigatório.");
         }
     }
@@ -135,9 +135,9 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
         jLabel7 = new javax.swing.JLabel();
         tfSituacao = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        tfSenhaAcesso = new javax.swing.JTextField();
         tfCrm = new javax.swing.JTextField();
         btListarPessoas = new javax.swing.JButton();
+        tfSenha = new javax.swing.JPasswordField();
         btConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -184,12 +184,12 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Senha de Acesso:");
 
-        tfSenhaAcesso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         tfCrm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btListarPessoas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btListarPessoas.setText("Lista");
+
+        tfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jpGeralLayout = new javax.swing.GroupLayout(jpGeral);
         jpGeral.setLayout(jpGeralLayout);
@@ -207,18 +207,18 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
                 .addGap(18, 18, 18)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpGeralLayout.createSequentialGroup()
+                        .addComponent(tfPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btListarPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109))
+                    .addGroup(jpGeralLayout.createSequentialGroup()
                         .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(tfSituacao, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
                             .addComponent(tfEspecialidade, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfDataInscricao, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfSenhaAcesso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-                            .addComponent(tfCrm, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(123, 123, 123))
-                    .addGroup(jpGeralLayout.createSequentialGroup()
-                        .addComponent(tfPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btListarPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109))))
+                            .addComponent(tfCrm, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSenha))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpGeralLayout.setVerticalGroup(
             jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,8 +247,8 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(tfSenhaAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Geral", jpGeral);
@@ -317,7 +317,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
     private javax.swing.JTextField tfDataInscricao;
     private javax.swing.JTextField tfEspecialidade;
     private javax.swing.JTextField tfPessoa;
-    private javax.swing.JTextField tfSenhaAcesso;
+    private javax.swing.JPasswordField tfSenha;
     private javax.swing.JTextField tfSituacao;
     // End of variables declaration//GEN-END:variables
 
