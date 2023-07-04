@@ -4,36 +4,46 @@
  */
 package View.Menu;
 
-import Controller.UsuarioController;
+import Controller.LoginController;
+import Controller.Observer.LoginObserver;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author felip
  */
-public class LoginView extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame implements LoginObserver{
 
     /**
      * Creates new form Login
      */
     
-    private UsuarioController usuarioController;
+    private LoginController loginController;
     
     public LoginView() {
         initComponents();
-        this.usuarioController = new UsuarioController();
+        this.loginController = new LoginController();
+        this.loginController.setViewObserver(this);
         addAcoes();
-        
     }
 
     private void addAcoes(){
         btLogin.addActionListener(e -> {
             try {
-                
+                validaCampos();
+                loginController.autenticarUsuario(tfUsuario.getText(), pfSenha.getText());
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
+    }
+    
+    private void validaCampos() throws Exception{
+        if(tfUsuario.getText().isBlank()){
+            throw new Exception("Campo \"E-mail\" é obrigatório.");
+        } else if (pfSenha.getText().isBlank()){
+            throw new Exception("Campo \"Senha\" é obrigatório.");
+        }
     }
     
     /**
@@ -141,7 +151,23 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 
-    private void exibirMensagem(String msg) {
+    
+    @Override
+    public void exibirMensagem(String msg) {
         JOptionPane.showMessageDialog(null, msg);
+    }
+
+    @Override
+    public void authUsuarioMedico() {
+        setVisible(false);
+        MenuMedicoView menuMedico = new MenuMedicoView();
+        menuMedico.setVisible(true);
+    }
+
+    @Override
+    public void authUsuario() {
+        setVisible(false);
+        MenuUsuarioView menuUsuario = new MenuUsuarioView();
+        menuUsuario.setVisible(true);
     }
 }

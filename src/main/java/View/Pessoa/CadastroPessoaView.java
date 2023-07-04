@@ -68,6 +68,8 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         } else if (tfBairro.getText().isBlank()){
             throw new Exception("Campo \"Bairro\" é obrigatório.");
         } else if (tfCidade.getText().isBlank()){
+            throw new Exception("Campo \"Número\" é obrigatório.");
+        } else if (tfNumero.getText().isBlank()){
             throw new Exception("Campo \"Cidade\" é obrigatório.");
         } else if (tfUf.getText().isBlank()){
             throw new Exception("Campo \"UF\" é obrigatório.");

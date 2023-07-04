@@ -7,6 +7,7 @@ package DAO;
 import Model.Usuario;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -65,6 +66,35 @@ public class UsuarioDao extends AcessoBD {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             throw new Exception("Ocorre um problema durante a exclusão do usuário.");
+        }
+    }
+    
+    public boolean authenticateMedico(String email, String senha) throws Exception{
+        try {
+            String sql = String.format("SELECT p.id_pessoa FROM Usuario u JOIN Pessoa p ON u.id_pessoa = p.id_pessoa JOIN Medico m ON p.id_pessoa = m.id_pessoa WHERE p.email = '%s' AND u.senha = '%s'", email, senha);
+            Query query = entityManager.createNativeQuery(sql);
+            //Query query = entityManager.createQuery("SELECT u FROM Usuario u JOIN Pessoa p ON u.id_pessoa = p.id_pessoa JOIN Medico m ON p.id_pessoa = m.id_pessoa WHERE p.email = :email AND u.senha = :senha");
+            //query.setParameter("email", email);
+            //query.setParameter("senha", senha); 
+            query.getSingleResult();
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean authenticateUsuario(String email, String senha) {
+        try {
+            String sql = String.format("SELECT * FROM Usuario u JOIN Pessoa p ON u.id_pessoa = p.id_pessoa WHERE p.email = '%s' AND u.senha = '%s'", email, senha);
+            Query query = entityManager.createNativeQuery(sql);
+            //query.setParameter("email", email);
+            //query.setParameter("senha", senha); 
+            query.getSingleResult();
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
         }
     }
     

@@ -37,7 +37,11 @@ public class MenuUsuarioView extends javax.swing.JFrame {
             ConsultaMedicoView consultaMedicoView = new ConsultaMedicoView();
             consultaMedicoView.setVisible(true);
         });
-        
+        btLogout.addActionListener(e -> {
+            setVisible(false);
+            LoginView loginView = new LoginView();
+            loginView.setVisible(true);
+        });
     }
 
     /**
@@ -49,8 +53,6 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         btLogout = new javax.swing.JButton();
         btPessoas = new javax.swing.JButton();
         btMedicos = new javax.swing.JButton();
@@ -64,16 +66,11 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel1.setText("Usuário:");
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jTextField1.setEnabled(false);
-
         btLogout.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btLogout.setText("Logout");
 
         btPessoas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-group-solid (Personalizado).png"))); // NOI18N
         btPessoas.setText("Pessoas");
         btPessoas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btPessoas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -84,6 +81,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btPessoas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btMedicos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-doctor-solid (Personalizado).png"))); // NOI18N
         btMedicos.setText("Médicos");
         btMedicos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btMedicos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -94,6 +92,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btMedicos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btAgendamentos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btAgendamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-group-solid (Personalizado).png"))); // NOI18N
         btAgendamentos.setText("Agendamentos");
         btAgendamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btAgendamentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -104,6 +103,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btAgendamentos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btEspecialidades.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btEspecialidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/stethoscope-solid (Personalizado).png"))); // NOI18N
         btEspecialidades.setText("Especialidades");
         btEspecialidades.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btEspecialidades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -114,6 +114,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btEspecialidades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-solid (Personalizado).png"))); // NOI18N
         btUsuarios.setText("Usuários");
         btUsuarios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -136,10 +137,6 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
@@ -160,10 +157,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btLogout)))
+                        .addComponent(btLogout))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel2)))
@@ -192,8 +186,6 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     private javax.swing.JButton btMedicos;
     private javax.swing.JButton btPessoas;
     private javax.swing.JButton btUsuarios;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

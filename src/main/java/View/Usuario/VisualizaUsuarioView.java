@@ -33,6 +33,7 @@ public class VisualizaUsuarioView extends javax.swing.JFrame implements UsuarioO
         } catch (Exception e) {
             exibirMensagem(e.getMessage());
         }
+        addAcoes();
     }
 
     private void addAcoes(){

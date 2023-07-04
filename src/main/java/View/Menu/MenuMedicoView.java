@@ -15,8 +15,23 @@ public class MenuMedicoView extends javax.swing.JFrame {
      */
     public MenuMedicoView() {
         initComponents();
+        addAcoes();
     }
 
+    private void addAcoes() {
+        btAgendamentos.addActionListener(e -> {
+
+        });
+        btReceitas.addActionListener(e -> {
+        
+        });
+        btLogout.addActionListener(e -> {
+            setVisible(false);
+            LoginView loginView = new LoginView();
+            loginView.setVisible(true);
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,8 +41,6 @@ public class MenuMedicoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         btLogout = new javax.swing.JButton();
         btReceitas = new javax.swing.JButton();
         btAgendamentos = new javax.swing.JButton();
@@ -38,16 +51,11 @@ public class MenuMedicoView extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel1.setText("Usuário:");
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jTextField1.setEnabled(false);
-
         btLogout.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btLogout.setText("Logout");
 
         btReceitas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btReceitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/stethoscope-solid (Personalizado).png"))); // NOI18N
         btReceitas.setText("Receitas Médicas");
         btReceitas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btReceitas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -58,6 +66,7 @@ public class MenuMedicoView extends javax.swing.JFrame {
         btReceitas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btAgendamentos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btAgendamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-group-solid (Personalizado).png"))); // NOI18N
         btAgendamentos.setText("Agendamentos");
         btAgendamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btAgendamentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -80,10 +89,6 @@ public class MenuMedicoView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
@@ -98,10 +103,7 @@ public class MenuMedicoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btLogout)))
+                        .addComponent(btLogout))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel2)))
@@ -123,8 +125,7 @@ public class MenuMedicoView extends javax.swing.JFrame {
     private javax.swing.JButton btAgendamentos;
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btReceitas;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }
