@@ -74,7 +74,7 @@
               </Group>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="btUsuarios" min="-2" pref="150" max="-2" attributes="0"/>
-              <EmptySpace pref="145" max="32767" attributes="0"/>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -231,7 +231,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="1"/>
+          <Font name="Segoe UI" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Menu"/>
       </Properties>

@@ -1,5 +1,8 @@
 package Model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,6 +18,10 @@ public class Agendamento {
     @OneToOne
     @JoinColumn(name = "id_medico")
     private Medico medico;
+    
+    @OneToOne
+    @JoinColumn(name = "id_pessoa")
+    private Pessoa paciente;
 
     @Column(nullable = false, length = 128)
     private String procedimento;
@@ -24,10 +31,11 @@ public class Agendamento {
 
     public Agendamento() {}
 
-    public Agendamento(Medico medico, String procedimento, Date data) {
+    public Agendamento(Medico medico, String procedimento, String data, Pessoa paciente) throws ParseException {
         this.medico = medico;
         this.procedimento = procedimento;
-        this.data = data;
+        this.data = formatStringtoDate(data);
+        this.paciente = paciente;
     }
 
     public Long getIdAgendamento() {
@@ -50,7 +58,7 @@ public class Agendamento {
         return procedimento;
     }
 
-    public void setProcedimento(String procedimento) {
+    public void setProcedimento(String procedimento) {  
         this.procedimento = procedimento;
     }
 
@@ -60,6 +68,24 @@ public class Agendamento {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public Pessoa getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Pessoa paciente) {
+        this.paciente = paciente;
+    }
+
+    private Date formatStringtoDate(String data) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.parse(data);
+    }
+    
+    public String formatDatetoString(){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(this.data);
     }
 }
 

@@ -63,7 +63,7 @@
                   <Component id="btReceitas" min="-2" pref="150" max="-2" attributes="0"/>
                   <Component id="btAgendamentos" min="-2" pref="150" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="343" max="32767" attributes="0"/>
+              <EmptySpace pref="336" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,7 +113,8 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imgs/user-group-solid (Personalizado).png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Agendamentos"/>
+        <Property name="text" type="java.lang.String" value="Atendimentos"/>
+        <Property name="actionCommand" type="java.lang.String" value="Atendimentos"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
@@ -136,7 +137,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="1"/>
+          <Font name="Segoe UI" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Menu"/>
       </Properties>

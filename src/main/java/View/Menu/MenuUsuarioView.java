@@ -4,6 +4,7 @@
  */
 package View.Menu;
 
+import View.Agendamento.ConsultaAgendamentoView;
 import View.Medico.ConsultaMedicoView;
 import View.Pessoa.ConsultaPessoaView;
 import View.Pessoa.ConsultaUsuarioView;
@@ -36,6 +37,10 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btMedicos.addActionListener(e -> {
             ConsultaMedicoView consultaMedicoView = new ConsultaMedicoView();
             consultaMedicoView.setVisible(true);
+        });
+        btAgendamentos.addActionListener(e -> {
+            ConsultaAgendamentoView consultaAgendamentoView = new ConsultaAgendamentoView();
+            consultaAgendamentoView.setVisible(true);
         });
         btLogout.addActionListener(e -> {
             setVisible(false);
@@ -124,7 +129,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btUsuarios.setVerifyInputWhenFocusTarget(false);
         btUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Menu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,7 +174,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                     .addComponent(btEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(btUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pack();

@@ -16,10 +16,10 @@ public class Run {
     
     public static void main(String[] args) {
         
-        /*MenuUsuarioView menuUsuarioView = new MenuUsuarioView();
-        menuUsuarioView.setVisible(true);*/
+        MenuUsuarioView menuUsuarioView = new MenuUsuarioView();
+        menuUsuarioView.setVisible(true);
         
-        LoginView loginView = new LoginView();
-        loginView.setVisible(true);
+        /*LoginView loginView = new LoginView();
+        loginView.setVisible(true);*/
     }
 }

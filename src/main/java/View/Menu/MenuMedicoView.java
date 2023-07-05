@@ -67,7 +67,8 @@ public class MenuMedicoView extends javax.swing.JFrame {
 
         btAgendamentos.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btAgendamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-group-solid (Personalizado).png"))); // NOI18N
-        btAgendamentos.setText("Agendamentos");
+        btAgendamentos.setText("Atendimentos");
+        btAgendamentos.setActionCommand("Atendimentos");
         btAgendamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btAgendamentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btAgendamentos.setMaximumSize(new java.awt.Dimension(160, 150));
@@ -76,7 +77,7 @@ public class MenuMedicoView extends javax.swing.JFrame {
         btAgendamentos.setVerifyInputWhenFocusTarget(false);
         btAgendamentos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Menu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,7 +112,7 @@ public class MenuMedicoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btReceitas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
 
         pack();

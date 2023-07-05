@@ -4,29 +4,31 @@
  */
 package View.Listas;
 
-import Controller.Observer.PessoaObserver;
-import Controller.PessoaController;
-import Model.Pessoa;
-import TableModel.PessoaTableModel;
-import javax.swing.JOptionPane;
+import Controller.MedicoController;
 import Controller.Observer.ListObserver;
+import Controller.Observer.MedicoObserver;
+import Model.Medico;
+import Model.Pessoa;
+import TableModel.MedicoTableModel;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author felip
  */
-public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserver{
+public class ListaMedicosView extends javax.swing.JFrame implements MedicoObserver{
 
-    private PessoaController pessoaController;
+    private MedicoController medicoController;
     private ListObserver controllerRetorno;
      
-    public ListaPessoasView(ListObserver viewRetorno) {
+    public ListaMedicosView(ListObserver viewRetorno) {
         initComponents();
-        this.pessoaController = new PessoaController();
-        this.pessoaController.addViewObserver(this);
+        this.medicoController = new MedicoController();
+        this.medicoController.addViewObserver(this);
         this.controllerRetorno = viewRetorno;
         try {
-            pessoaController.preencherTabelaPessoa();
+            medicoController.preencherTabelaMedico();
             addAcoes();
        } catch (Exception e) {
             exibirMensagem(e.getMessage());
@@ -36,22 +38,24 @@ public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserv
     private void addAcoes(){
         btSelecionar.addActionListener(e ->{
             try {
-                this.pessoaController.buscaPessoa(getIdPessoa());
-                this.setVisible(false);
+                this.medicoController.buscaMedico(getIdMedico());
+                this.medicoController.removeViewObserver(this);
+                setVisible(false);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
         btFechar.addActionListener(e -> {
+            medicoController.removeViewObserver(this);
             setVisible(false);
         });
     }
     
-    public Long getIdPessoa() throws Exception{
-        if(tbPessoas.getSelectedRow() == -1){
+    public Long getIdMedico() throws Exception{
+        if(tbMedicos.getSelectedRow() == -1){
             throw new Exception("Nenhuma linha selecionada");
         } else {
-            return Long.parseLong(tbPessoas.getModel().getValueAt(tbPessoas.getSelectedRow(), 0).toString());
+            return Long.parseLong(tbMedicos.getModel().getValueAt(tbMedicos.getSelectedRow(), 0).toString());
         }
     }
     
@@ -66,7 +70,7 @@ public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserv
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbPessoas = new javax.swing.JTable();
+        tbMedicos = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btSelecionar = new javax.swing.JButton();
@@ -77,10 +81,10 @@ public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserv
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Pessoas");
+        jLabel1.setText("Médicos");
 
-        tbPessoas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tbPessoas.setModel(new javax.swing.table.DefaultTableModel(
+        tbMedicos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tbMedicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,14 +95,14 @@ public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserv
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbPessoas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tbPessoas);
+        tbMedicos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tbMedicos);
 
         btFechar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btFechar.setText("Fechar");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("> Lista de Pessoas");
+        jLabel2.setText("> Lista de Médicos");
 
         btSelecionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btSelecionar.setText("Selecionar");
@@ -153,25 +157,27 @@ public class ListaPessoasView extends javax.swing.JFrame implements PessoaObserv
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbPessoas;
+    private javax.swing.JTable tbMedicos;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void exibirMensagem(String msg) {
         JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
-    public void listarPessoas(PessoaTableModel tableModel) {
-        tbPessoas.setModel(tableModel);
+    public void listarMedicos(MedicoTableModel tableModel) {
+        tbMedicos.setModel(tableModel);
+    }
+
+    @Override
+    public void retornaMedico(Medico medico) {
+        this.controllerRetorno.retornaObjeto(medico);
     }
 
     @Override
     public void retornaPessoa(Pessoa pessoa) {
-       this.controllerRetorno.retornaObjeto(pessoa);
-    }
-
-    @Override
-    public void exibirMensagemConfirmacao(String msg) {
         //SEM IMPLEMENTAÇÃO
     }
+
 }

@@ -29,6 +29,10 @@ public class MedicoController  implements ListObserver{
         this.medicoView.add(obs);
     }
 
+    public void removeViewObserver(MedicoObserver obs){
+        this.medicoView.remove(obs);
+    }
+    
     public void gravarMedico(Medico medico) throws Exception {
         medico.setPessoa(pessoaSelecionada);
         medicoDao.addMedico(medico);
