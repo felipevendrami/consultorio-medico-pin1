@@ -50,7 +50,7 @@ public class UsuarioDao extends AcessoBD {
             
             Usuario Usuario = getUsuario(usuarioMod.getIdUsuario());
             Usuario = usuarioMod;
-            entityManager.getTransaction().begin();
+            entityManager.getTransaction().begin(); 
             entityManager.merge(Usuario);
             entityManager.getTransaction().commit();
         } catch (Exception e) {

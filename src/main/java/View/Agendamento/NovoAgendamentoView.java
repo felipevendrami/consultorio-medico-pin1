@@ -281,4 +281,9 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
         tfMedico.setText(medico.getPessoa().getNome());
     }
 
+    @Override
+    public void retornaAgendamento(Agendamento agendamento) {
+        //SEM IMPLEMENTAÇÃO
+    }
+
 }

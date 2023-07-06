@@ -35,4 +35,36 @@ public class AgendamentoDao extends AcessoBD{
         }
     }
 
+    public Agendamento getAgendamento(Long idAgendamento) throws Exception {
+        try {
+            return entityManager.find(Agendamento.class, idAgendamento);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            throw new Exception("Ocorreu um problema durante a busca do agendamento");
+        }
+    }
+
+    public void modifyAgendamento(Agendamento agendamentoMod) throws Exception {
+        try {
+            Agendamento agendamento = getAgendamento(agendamentoMod.getIdAgendamento());
+            agendamento = agendamentoMod;
+            entityManager.getTransaction().begin();
+            entityManager.merge(agendamento);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            throw new Exception("Ocorreu um problema na alteração do agendamento.");
+        }
+    }
+
+    public void deleteAgendamento(Agendamento agendamento) throws Exception{
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(agendamento);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            throw new Exception("Ocorreu um problema durante a exclusão do agendamento");
+        }
+    }
+
 }

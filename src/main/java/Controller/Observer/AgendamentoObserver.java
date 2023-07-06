@@ -4,6 +4,7 @@
  */
 package Controller.Observer;
 
+import Model.Agendamento;
 import Model.Medico;
 import Model.Pessoa;
 import TableModel.AgendamentoTableModel;
@@ -18,4 +19,5 @@ public interface AgendamentoObserver {
     void listarAgendamentos(AgendamentoTableModel tableModel);
     void retornaPessoa(Pessoa pessoa);
     void retornaMedico(Medico medico);
+    void retornaAgendamento(Agendamento agendamento);
 }

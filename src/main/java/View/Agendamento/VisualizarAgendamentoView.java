@@ -10,9 +10,6 @@ import Model.Agendamento;
 import Model.Medico;
 import Model.Pessoa;
 import TableModel.AgendamentoTableModel;
-import View.Listas.ListaMedicosView;
-import View.Listas.ListaPessoasView;
-import java.text.ParseException;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,10 +24,15 @@ public class VisualizarAgendamentoView extends javax.swing.JFrame implements Age
     
     private AgendamentoController agendamentoController;
     
-    public VisualizarAgendamentoView(AgendamentoController agendamentoController) {
+    public VisualizarAgendamentoView(AgendamentoController agendamentoController, Long idAgendamento) {
         initComponents();
         this.agendamentoController = agendamentoController;
-        agendamentoController.addViewObserver(this);
+        this.agendamentoController.addViewObserver(this);
+        try {
+            this.agendamentoController.buscarAgendamento(idAgendamento);
+        } catch (Exception e) {
+            exibirMensagem(e.getMessage());
+        }
         addAcoes();
     }
 
@@ -211,6 +213,14 @@ public class VisualizarAgendamentoView extends javax.swing.JFrame implements Age
     @Override
     public void retornaMedico(Medico medico) {
         //SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void retornaAgendamento(Agendamento agendamento) {
+        tfPaciente.setText(agendamento.getPaciente().getNome());
+        tfMedico.setText(agendamento.getMedico().getPessoa().getNome());
+        tfData.setText(agendamento.formatDatetoString());
+        taProcedimento.append(agendamento.getProcedimento());
     }
 
 }

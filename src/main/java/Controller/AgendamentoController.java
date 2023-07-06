@@ -25,6 +25,7 @@ public class AgendamentoController implements ListObserver{
     private AgendamentoTableModel agendamentoTableModel;
     private Pessoa pessoaSelecionada;
     private Medico medicoSelecinado;
+    private Agendamento ModelAgendamento;
     
     public void addViewObserver(AgendamentoObserver obs){
         this.agendamentoView.add(obs);
@@ -66,4 +67,35 @@ public class AgendamentoController implements ListObserver{
             }
         }
     }    
+
+    public void buscarAgendamento(Long idAgendamento) throws Exception{
+        ModelAgendamento = agendamentoDao.getAgendamento(idAgendamento);
+        this.pessoaSelecionada = ModelAgendamento.getPaciente();
+        this.medicoSelecinado = ModelAgendamento.getMedico();
+        for(AgendamentoObserver view : agendamentoView){
+            view.retornaAgendamento(ModelAgendamento);
+        }
+    }
+
+    public void modificaAgendamento(Agendamento agendamentoMod) throws Exception{
+        agendamentoMod.setPaciente(pessoaSelecionada);
+        agendamentoMod.setMedico(medicoSelecinado);
+        agendamentoMod.setIdAgendamento(ModelAgendamento.getIdAgendamento());
+        agendamentoMod.getPaciente().setId(ModelAgendamento.getPaciente().getId());
+        agendamentoMod.getMedico().setIdMedico(ModelAgendamento.getMedico().getIdMedico());
+        agendamentoDao.modifyAgendamento(agendamentoMod);
+        preencherTabelaAgendamento();
+        for(AgendamentoObserver view : agendamentoView){
+            view.exibirMensagem("Agendamento alterado com sucesso !");
+        }
+    }
+
+    public void excluirAgendamento(Long idAgendamento) throws Exception{
+        Agendamento agendamento = agendamentoDao.getAgendamento(idAgendamento);
+        agendamentoDao.deleteAgendamento(agendamento);
+        preencherTabelaAgendamento();
+        for(AgendamentoObserver view : agendamentoView){
+            view.exibirMensagem("Agendamento excluído com sucesso !");
+        }
+    }
 }

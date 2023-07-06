@@ -27,10 +27,15 @@ public class AlterarAgendamentoView extends javax.swing.JFrame implements Agenda
     
     private AgendamentoController agendamentoController;
     
-    public AlterarAgendamentoView(AgendamentoController agendamentoController) {
+    public AlterarAgendamentoView(AgendamentoController agendamentoController, Long idAgendamento) {
         initComponents();
         this.agendamentoController = agendamentoController;
-        agendamentoController.addViewObserver(this);
+        this.agendamentoController.addViewObserver(this);
+        try {
+            this.agendamentoController.buscarAgendamento(idAgendamento);
+        } catch (Exception e) {
+            exibirMensagem(e.getMessage());
+        }
         addAcoes();
     }
 
@@ -54,7 +59,7 @@ public class AlterarAgendamentoView extends javax.swing.JFrame implements Agenda
         btConfirmar.addActionListener(e -> {
             try {
                 validaCampos();
-                agendamentoController.gravarAgendamento(montaAgendamento());
+                agendamentoController.modificaAgendamento(montaAgendamento());
                 setVisible(false);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
@@ -109,7 +114,7 @@ public class AlterarAgendamentoView extends javax.swing.JFrame implements Agenda
         tfData = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Sistema - Novo Agendamento");
+        setTitle("Sistema - Alterar Agendamento");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -279,6 +284,14 @@ public class AlterarAgendamentoView extends javax.swing.JFrame implements Agenda
     @Override
     public void retornaMedico(Medico medico) {
         tfMedico.setText(medico.getPessoa().getNome());
+    }
+
+    @Override
+    public void retornaAgendamento(Agendamento agendamento) {
+        tfPaciente.setText(agendamento.getPaciente().getNome());
+        tfMedico.setText(agendamento.getMedico().getPessoa().getNome());
+        tfData.setText(agendamento.formatDatetoString());
+        taProcedimento.append(agendamento.getProcedimento());
     }
 
 }

@@ -10,7 +10,6 @@ import Model.Agendamento;
 import Model.Medico;
 import Model.Pessoa;
 import TableModel.AgendamentoTableModel;
-import TableModel.PessoaTableModel;
 import javax.swing.JOptionPane;
 
 
@@ -41,18 +40,43 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
             novoAgendamentoView.setVisible(true);
         });
         btAlterar.addActionListener(e -> {
-        
+            try {
+                AlterarAgendamentoView alterarAgendamentoView = new AlterarAgendamentoView(agendamentoController, getIdAgendamento());
+                alterarAgendamentoView.setVisible(true);
+            } catch (Exception ex){
+                exibirMensagem(ex.getMessage());
+            } 
         });
         btVisualizar.addActionListener(e -> {
-        
+            try {
+                VisualizarAgendamentoView visualizarAgendamentoView = new VisualizarAgendamentoView(agendamentoController, getIdAgendamento());
+                visualizarAgendamentoView.setVisible(true);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btDeletar.addActionListener(e -> {
-        
+            try {
+                int opcao = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar o Agentamento selecionado ?", "Pergunta", 0);
+                if(opcao == 0){
+                    this.agendamentoController.excluirAgendamento(getIdAgendamento());
+                }
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
+            }
         });
         btVoltar.addActionListener(e -> {
             agendamentoController.removeViewObserver(this);
             setVisible(false);
         });
+    }
+    
+    public Long getIdAgendamento() throws Exception{
+        if(tbAgendamentos.getSelectedRow() == -1){
+            throw new Exception("Nenhuma linha selecionada");
+        } else {
+            return Long.parseLong(tbAgendamentos.getModel().getValueAt(tbAgendamentos.getSelectedRow(), 0).toString());
+        }
     }
     
     /**
@@ -186,6 +210,11 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
 
     @Override
     public void retornaMedico(Medico medico) {
+        //SEM IMPLEMENTAÇÃO
+    }
+
+    @Override
+    public void retornaAgendamento(Agendamento agendamento) {
         //SEM IMPLEMENTAÇÃO
     }
 }
