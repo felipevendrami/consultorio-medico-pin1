@@ -5,19 +5,13 @@
 package View.Agendamento;
 
 import Controller.AgendamentoController;
-<<<<<<< HEAD
-=======
 import Controller.AtendimentoController;
->>>>>>> master
 import Controller.Observer.AgendamentoObserver;
 import Model.Agendamento;
 import Model.Medico;
 import Model.Pessoa;
 import TableModel.AgendamentoTableModel;
-<<<<<<< HEAD
-=======
 import View.Atendimento.CadastroAtendimentoView;
->>>>>>> master
 import javax.swing.JOptionPane;
 
 
@@ -28,11 +22,7 @@ import javax.swing.JOptionPane;
 public class ConsultaAgendamentoView extends javax.swing.JFrame implements AgendamentoObserver{
 
     private AgendamentoController agendamentoController;
-<<<<<<< HEAD
-=======
     public AtendimentoController atendimentoController;
-    
->>>>>>> master
     
     public ConsultaAgendamentoView() {
         initComponents();
@@ -82,8 +72,6 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
             agendamentoController.removeViewObserver(this);
             setVisible(false);
         });
-<<<<<<< HEAD
-=======
         
         btAtendimento.addActionListener(e -> {
             try {
@@ -93,7 +81,6 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
                 exibirMensagem(ex.getMessage());
             } 
         });
->>>>>>> master
     }
     
     public Long getIdAgendamento() throws Exception{
@@ -121,10 +108,7 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
         btVisualizar = new javax.swing.JButton();
         btDeletar = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-<<<<<<< HEAD
-=======
         btAtendimento = new javax.swing.JButton();
->>>>>>> master
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema - Consulta Agendamentos");
@@ -164,12 +148,9 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
         btVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btVoltar.setText("Voltar");
 
-<<<<<<< HEAD
-=======
         btAtendimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btAtendimento.setText("Atendimento");
 
->>>>>>> master
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,13 +166,9 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
                         .addGap(18, 18, 18)
                         .addComponent(btVisualizar)
                         .addGap(18, 18, 18)
-<<<<<<< HEAD
-                        .addComponent(btDeletar))
-=======
                         .addComponent(btDeletar)
                         .addGap(18, 18, 18)
                         .addComponent(btAtendimento))
->>>>>>> master
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -206,12 +183,8 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
                     .addComponent(btNovoAtendimento)
                     .addComponent(btAlterar)
                     .addComponent(btVisualizar)
-<<<<<<< HEAD
-                    .addComponent(btDeletar))
-=======
                     .addComponent(btDeletar)
                     .addComponent(btAtendimento))
->>>>>>> master
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -230,10 +203,9 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
-<<<<<<< HEAD
-=======
+
     private javax.swing.JButton btAtendimento;
->>>>>>> master
+
     private javax.swing.JButton btDeletar;
     private javax.swing.JButton btNovoAtendimento;
     private javax.swing.JButton btVisualizar;
