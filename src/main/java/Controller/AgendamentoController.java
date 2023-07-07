@@ -59,7 +59,7 @@ public class AgendamentoController implements ListObserver{
     }
 
     @Override
-    public void retornaObjeto(Object obj) {
+    public void retornaObjeto(Object obj){
         if(obj instanceof Pessoa){
             this.pessoaSelecionada = (Pessoa) obj;
             for(AgendamentoObserver view : agendamentoView){
@@ -86,8 +86,8 @@ public class AgendamentoController implements ListObserver{
         agendamentoMod.setPaciente(pessoaSelecionada);
         agendamentoMod.setMedico(medicoSelecinado);
         agendamentoMod.setIdAgendamento(ModelAgendamento.getIdAgendamento());
-        agendamentoMod.getPaciente().setId(ModelAgendamento.getPaciente().getId());
-        agendamentoMod.getMedico().setIdMedico(ModelAgendamento.getMedico().getIdMedico());
+        //agendamentoMod.getPaciente().setId(ModelAgendamento.getPaciente().getId());
+        //agendamentoMod.getMedico().setIdMedico(ModelAgendamento.getMedico().getIdMedico());
         agendamentoDao.modifyAgendamento(agendamentoMod);
         preencherTabelaAgendamento();
         for(AgendamentoObserver view : agendamentoView){
@@ -123,5 +123,16 @@ public class AgendamentoController implements ListObserver{
     private Date formatStringtoDate(String data) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.parse(data);
+    }
+    
+    public boolean validaPessoasSelecionadasIguais(){
+        if((pessoaSelecionada != null) && (medicoSelecinado != null)){
+            if(pessoaSelecionada != medicoSelecinado.getPessoa()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }

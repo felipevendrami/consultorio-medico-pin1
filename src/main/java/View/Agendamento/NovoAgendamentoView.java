@@ -56,6 +56,7 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
                 validaCampos();
                 agendamentoController.validaData(tfData.getText());
                 agendamentoController.gravarAgendamento(montaAgendamento());
+                agendamentoController.removeViewObserver(this);
                 setVisible(false);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
