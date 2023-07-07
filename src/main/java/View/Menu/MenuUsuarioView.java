@@ -30,10 +30,17 @@ public class MenuUsuarioView extends javax.swing.JFrame {
             ConsultaPessoaView consultaPessoasView = new ConsultaPessoaView();
             consultaPessoasView.setVisible(true);
         });
+<<<<<<< HEAD
         btUsuarios.addActionListener(e -> {
             ConsultaUsuarioView consultaUsuarioView = new ConsultaUsuarioView();
             consultaUsuarioView.setVisible(true);
         });
+=======
+       // btUsuarios.addActionListener(e -> {
+       //     ConsultaUsuarioView consultaUsuarioView = new ConsultaUsuarioView();
+       //     consultaUsuarioView.setVisible(true);
+       // });
+>>>>>>> master
         btMedicos.addActionListener(e -> {
             ConsultaMedicoView consultaMedicoView = new ConsultaMedicoView();
             consultaMedicoView.setVisible(true);
@@ -62,8 +69,14 @@ public class MenuUsuarioView extends javax.swing.JFrame {
         btPessoas = new javax.swing.JButton();
         btMedicos = new javax.swing.JButton();
         btAgendamentos = new javax.swing.JButton();
+<<<<<<< HEAD
         btUsuarios = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+=======
+        btEspecialidades = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btUsuarios1 = new javax.swing.JButton();
+>>>>>>> master
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema - Consultas");
@@ -111,6 +124,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         btUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-solid (Personalizado).png"))); // NOI18N
         btUsuarios.setText("Usuários");
@@ -126,10 +140,36 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                 btUsuariosActionPerformed(evt);
             }
         });
+=======
+        btEspecialidades.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btEspecialidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/stethoscope-solid (Personalizado).png"))); // NOI18N
+        btEspecialidades.setText("Especialidades");
+        btEspecialidades.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btEspecialidades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btEspecialidades.setMaximumSize(new java.awt.Dimension(160, 150));
+        btEspecialidades.setMinimumSize(new java.awt.Dimension(160, 150));
+        btEspecialidades.setPreferredSize(new java.awt.Dimension(160, 150));
+        btEspecialidades.setVerifyInputWhenFocusTarget(false);
+        btEspecialidades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+>>>>>>> master
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Menu");
 
+<<<<<<< HEAD
+=======
+        btUsuarios1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-solid (Personalizado).png"))); // NOI18N
+        btUsuarios1.setText("Usuários");
+        btUsuarios1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btUsuarios1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btUsuarios1.setMaximumSize(new java.awt.Dimension(160, 150));
+        btUsuarios1.setMinimumSize(new java.awt.Dimension(160, 150));
+        btUsuarios1.setPreferredSize(new java.awt.Dimension(160, 150));
+        btUsuarios1.setVerifyInputWhenFocusTarget(false);
+        btUsuarios1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+>>>>>>> master
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,6 +182,7 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))
+<<<<<<< HEAD
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
@@ -151,6 +192,22 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(btUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))))
+=======
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(btMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(34, 34, 34)
+                    .addComponent(btUsuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(606, Short.MAX_VALUE)))
+>>>>>>> master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,17 +224,30 @@ public class MenuUsuarioView extends javax.swing.JFrame {
                     .addComponent(btPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                     .addComponent(btUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(336, Short.MAX_VALUE))
+=======
+                    .addComponent(btEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(336, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(322, Short.MAX_VALUE)
+                    .addComponent(btUsuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(128, 128, 128)))
+>>>>>>> master
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void btUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUsuariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btUsuariosActionPerformed
 
+=======
+>>>>>>> master
     private void btAgendamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgendamentosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btAgendamentosActionPerformed
@@ -188,10 +258,18 @@ public class MenuUsuarioView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgendamentos;
+<<<<<<< HEAD
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btMedicos;
     private javax.swing.JButton btPessoas;
     private javax.swing.JButton btUsuarios;
+=======
+    private javax.swing.JButton btEspecialidades;
+    private javax.swing.JButton btLogout;
+    private javax.swing.JButton btMedicos;
+    private javax.swing.JButton btPessoas;
+    private javax.swing.JButton btUsuarios1;
+>>>>>>> master
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

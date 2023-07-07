@@ -2,105 +2,77 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View.Agendamento;
+package View.Atendimento;
 
-import Controller.AgendamentoController;
-<<<<<<< HEAD
-=======
+import View.Atendimento.*;
+import View.Atendimento.*;
+import Controller.Observer.AtendimentoObserver;
 import Controller.AtendimentoController;
->>>>>>> master
-import Controller.Observer.AgendamentoObserver;
-import Model.Agendamento;
+import Model.Atendimento;
 import Model.Medico;
 import Model.Pessoa;
-import TableModel.AgendamentoTableModel;
-<<<<<<< HEAD
-=======
-import View.Atendimento.CadastroAtendimentoView;
->>>>>>> master
+import TableModel.AtendimentoTableModel;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author felip
  */
-public class ConsultaAgendamentoView extends javax.swing.JFrame implements AgendamentoObserver{
+public class ConsultaAtendimentoView extends javax.swing.JFrame implements AtendimentoObserver{
 
-    private AgendamentoController agendamentoController;
-<<<<<<< HEAD
-=======
-    public AtendimentoController atendimentoController;
+    private AtendimentoController atendimentoController;
     
->>>>>>> master
-    
-    public ConsultaAgendamentoView() {
+    public ConsultaAtendimentoView() {
         initComponents();
-        this.agendamentoController = new AgendamentoController();
-        agendamentoController.addViewObserver(this);
+        this.atendimentoController = new AtendimentoController();
+        atendimentoController.addViewObserver(this);
         try {
-            agendamentoController.preencherTabelaAgendamento();
+            atendimentoController.preencherTabelaAtendimento();
             addAcoes();
         } catch (Exception e) {
             exibirMensagem(e.getMessage());
         }
-        
     }
     
     private void addAcoes(){
-        btNovoAtendimento.addActionListener(e -> {
-            NovoAgendamentoView novoAgendamentoView = new NovoAgendamentoView(agendamentoController);
-            novoAgendamentoView.setVisible(true);
+        btCadastrar.addActionListener(e -> {
+            CadastroAtendimentoView cadAtendimentoView = new CadastroAtendimentoView(atendimentoController, null);
+            cadAtendimentoView.setVisible(true);
         });
         btAlterar.addActionListener(e -> {
             try {
-                AlterarAgendamentoView alterarAgendamentoView = new AlterarAgendamentoView(agendamentoController, getIdAgendamento());
-                alterarAgendamentoView.setVisible(true);
-            } catch (Exception ex){
+                AlteraAtendimentoView alteraAtendimentoView = new AlteraAtendimentoView(atendimentoController, getIdAtendimento());
+                alteraAtendimentoView.setVisible(true);
+            } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
-            } 
+            }
         });
         btVisualizar.addActionListener(e -> {
             try {
-                VisualizarAgendamentoView visualizarAgendamentoView = new VisualizarAgendamentoView(agendamentoController, getIdAgendamento());
-                visualizarAgendamentoView.setVisible(true);
+                VisualizaAtendimentoView visualizaAtendimentoView = new VisualizaAtendimentoView(atendimentoController, getIdAtendimento());
+                visualizaAtendimentoView.setVisible(true);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
         btDeletar.addActionListener(e -> {
             try {
-                int opcao = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar o Agentamento selecionado ?", "Pergunta", 0);
+                int opcao = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar o atendimento selecionado?", "Aviso", 0);
                 if(opcao == 0){
-                    this.agendamentoController.excluirAgendamento(getIdAgendamento());
+                    this.atendimentoController.excluirAtendimento(getIdAtendimento());
                 }
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
-        btVoltar.addActionListener(e -> {
-            agendamentoController.removeViewObserver(this);
-            setVisible(false);
-        });
-<<<<<<< HEAD
-=======
-        
-        btAtendimento.addActionListener(e -> {
-            try {
-                CadastroAtendimentoView cadastroAtendimentoView = new CadastroAtendimentoView(null, getIdAgendamento());
-                cadastroAtendimentoView.setVisible(true);
-            } catch (Exception ex){
-                exibirMensagem(ex.getMessage());
-            } 
-        });
->>>>>>> master
+        btVoltar.addActionListener(e -> setVisible(false));
     }
-    
-    public Long getIdAgendamento() throws Exception{
-        if(tbAgendamentos.getSelectedRow() == -1){
+
+    public Long getIdAtendimento() throws Exception{
+        if(tbAtendimento.getSelectedRow() == -1){
             throw new Exception("Nenhuma linha selecionada");
         } else {
-            return Long.parseLong(tbAgendamentos.getModel().getValueAt(tbAgendamentos.getSelectedRow(), 0).toString());
+            return Long.parseLong(tbAtendimento.getModel().getValueAt(tbAtendimento.getSelectedRow(), 0).toString());
         }
     }
     
@@ -115,27 +87,23 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbAgendamentos = new javax.swing.JTable();
-        btNovoAtendimento = new javax.swing.JButton();
+        tbAtendimento = new javax.swing.JTable();
+        btCadastrar = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
         btVisualizar = new javax.swing.JButton();
         btDeletar = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-<<<<<<< HEAD
-=======
-        btAtendimento = new javax.swing.JButton();
->>>>>>> master
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Sistema - Consulta Agendamentos");
+        setTitle("Sistema - Consulta Pessoas");
         setMinimumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Agendamentos");
+        jLabel1.setText("Médicos");
 
-        tbAgendamentos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tbAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
+        tbAtendimento.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tbAtendimento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -146,11 +114,11 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbAgendamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tbAgendamentos);
+        tbAtendimento.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tbAtendimento);
 
-        btNovoAtendimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btNovoAtendimento.setText("Novo Atendimento");
+        btCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btCadastrar.setText("Cadastrar");
 
         btAlterar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btAlterar.setText("Alterar");
@@ -164,12 +132,6 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
         btVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btVoltar.setText("Voltar");
 
-<<<<<<< HEAD
-=======
-        btAtendimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btAtendimento.setText("Atendimento");
-
->>>>>>> master
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,19 +141,13 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btVoltar)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btNovoAtendimento)
+                        .addComponent(btCadastrar)
                         .addGap(18, 18, 18)
                         .addComponent(btAlterar)
                         .addGap(18, 18, 18)
                         .addComponent(btVisualizar)
                         .addGap(18, 18, 18)
-<<<<<<< HEAD
                         .addComponent(btDeletar))
-=======
-                        .addComponent(btDeletar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btAtendimento))
->>>>>>> master
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -203,15 +159,10 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
                 .addComponent(jLabel1)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btNovoAtendimento)
+                    .addComponent(btCadastrar)
                     .addComponent(btAlterar)
                     .addComponent(btVisualizar)
-<<<<<<< HEAD
                     .addComponent(btDeletar))
-=======
-                    .addComponent(btDeletar)
-                    .addComponent(btAtendimento))
->>>>>>> master
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -230,17 +181,13 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
-<<<<<<< HEAD
-=======
-    private javax.swing.JButton btAtendimento;
->>>>>>> master
+    private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btDeletar;
-    private javax.swing.JButton btNovoAtendimento;
     private javax.swing.JButton btVisualizar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbAgendamentos;
+    private javax.swing.JTable tbAtendimento;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -249,22 +196,17 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
     }
 
     @Override
-    public void listarAgendamentos(AgendamentoTableModel tableModel) {
-        tbAgendamentos.setModel(tableModel);
+    public void listarAtendimentos(AtendimentoTableModel tableModel) {
+        tbAtendimento.setModel(tableModel);
     }
 
     @Override
-    public void retornaPessoa(Pessoa pessoa) {
-        //SEM IMPLEMENTAÇÃO
+    public void retornaAtendimento(Atendimento atendimento){
+        // SEM IMPLEMENTAÇÃO
     }
 
     @Override
     public void retornaMedico(Medico medico) {
-        //SEM IMPLEMENTAÇÃO
-    }
-
-    @Override
-    public void retornaAgendamento(Agendamento agendamento) {
-        //SEM IMPLEMENTAÇÃO
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

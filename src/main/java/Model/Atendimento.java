@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,8 @@ public class Atendimento {
     @Column(name = "id_atendimento")
     private Long idAtendimento;
 
-    @OneToOne
     @JoinColumn(name = "id_agendamento")
-    private Agendamento agendamento;
+    private Long agendamento;
 
     @Column(nullable = false, length = 200)
     private String sintoma;
@@ -24,13 +25,26 @@ public class Atendimento {
     @Column(nullable = false, length = 200)
     private String diagnostico;
 
+    @Column(nullable = false, length = 200)
+    private String procedimento;
+
+    @OneToOne
+    @JoinColumn(name = "id_medico")
+    private Medico medico;
+    
+    @Column(nullable = false)
+    private java.util.Date data;
+    
     public Atendimento() {}
 
-    public Atendimento(Agendamento agendamento, String sintoma, String alergia, String diagnostico) {
+    public Atendimento(Long agendamento, Medico medico, String sintoma, String alergia, String diagnostico, String data, String procedimento) throws ParseException {
         this.agendamento = agendamento;
         this.sintoma = sintoma;
         this.alergia = alergia;
         this.diagnostico = diagnostico;
+        this.medico = medico;
+        this.data = formatStringtoDate(data);
+        this.procedimento = procedimento;
     }
 
     public Long getIdAtendimento() {
@@ -41,12 +55,28 @@ public class Atendimento {
         this.idAtendimento = idAtendimento;
     }
 
-    public Agendamento getAgendamento() {
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+    
+    public Long getAgendamento() {
         return agendamento;
     }
 
-    public void setAgendamento(Agendamento agendamento) {
+    public void setAgendamento(Long agendamento) {
         this.agendamento = agendamento;
+    }
+    
+    public String getProcedimento() {
+        return procedimento;
+    }
+
+    public void setProcedimento(String procedimento) {
+        this.procedimento = procedimento;
     }
 
     public String getSintoma() {
@@ -72,5 +102,16 @@ public class Atendimento {
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
     }
+    
+     private java.util.Date formatStringtoDate(String data) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.parse(data);
+    }
+    
+    public String formatDatetoString(){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(this.data);
+    }
+
 }
 
