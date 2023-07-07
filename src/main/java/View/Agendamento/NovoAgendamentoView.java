@@ -265,7 +265,7 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

@@ -270,7 +270,7 @@ public class AlterarAgendamentoView extends javax.swing.JFrame implements Agenda
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

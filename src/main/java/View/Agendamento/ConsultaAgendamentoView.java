@@ -31,7 +31,6 @@ public class ConsultaAgendamentoView extends javax.swing.JFrame implements Agend
         } catch (Exception e) {
             exibirMensagem(e.getMessage());
         }
-        
     }
     
     private void addAcoes(){

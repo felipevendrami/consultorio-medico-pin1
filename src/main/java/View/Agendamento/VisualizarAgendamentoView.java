@@ -197,7 +197,7 @@ public class VisualizarAgendamentoView extends javax.swing.JFrame implements Age
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

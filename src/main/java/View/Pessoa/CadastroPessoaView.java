@@ -423,7 +423,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

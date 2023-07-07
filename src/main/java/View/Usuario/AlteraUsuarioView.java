@@ -244,7 +244,7 @@ public class AlteraUsuarioView extends javax.swing.JFrame implements UsuarioObse
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

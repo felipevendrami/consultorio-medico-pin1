@@ -249,7 +249,7 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
@@ -260,7 +260,7 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
     @Override
     public void retornaMedico(Medico medico) {
         tfPessoa.setText(medico.getPessoa().getNome());
-        tfEspecialidade.setText(medico.getEspecialidade().getDescricao());
+        tfEspecialidade.setText(medico.getEspecialidade());
         tfCrm.setText(medico.getCrm());
         tfDataInscricao.setText(medico.getDataInscricao().toString());
         tfSituacao.setText(medico.getSituacao());

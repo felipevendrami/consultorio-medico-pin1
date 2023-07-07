@@ -30,8 +30,7 @@ public class Especialidade {
 
     public Especialidade() {}
 
-    public Especialidade(Long idEspecialidade, String descricao, String procedimentos, double valorConsulta) {
-        this.idEspecialidade = idEspecialidade;
+    public Especialidade(String descricao, String procedimentos, double valorConsulta) {
         this.descricao = descricao;
         this.procedimentos = procedimentos;
         this.valorConsulta = valorConsulta;

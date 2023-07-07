@@ -247,7 +247,7 @@ public class CadastroUsuarioView extends javax.swing.JFrame implements UsuarioOb
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

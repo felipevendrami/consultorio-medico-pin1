@@ -29,9 +29,8 @@ public class Medico {
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "id_especialidade")
-    private Especialidade especialidade;
+    @Column(nullable = false, length = 100)
+    private String especialidade;
 
     @Column(nullable = false, length = 12)
     private String crm;
@@ -44,11 +43,12 @@ public class Medico {
 
     public Medico() {}
 
-    public Medico(Pessoa pessoa, String crm, String dataInscricao, String situacao) throws ParseException {
+    public Medico(Pessoa pessoa, String crm, String dataInscricao, String situacao, String Especialidade) throws ParseException {
         this.pessoa = pessoa;
         this.crm = crm;
         this.dataInscricao = formatStringtoDate(dataInscricao);
         this.situacao = situacao;
+        this.especialidade = especialidade;
     }
 
     public Long getIdMedico() {
@@ -67,11 +67,11 @@ public class Medico {
         this.pessoa = pessoa;
     }
 
-    public Especialidade getEspecialidade() {
+    public String getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(Especialidade especialidade) {
+    public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
 

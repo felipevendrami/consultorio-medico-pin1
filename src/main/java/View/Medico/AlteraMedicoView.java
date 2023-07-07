@@ -63,7 +63,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
     }
 
     private Medico montaMedico() throws ParseException {
-        Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText());
+        Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText(), tfEspecialidade.getText());
         return medico;
     }
 
@@ -89,7 +89,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
     //}
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
     @Override
     public void retornaMedico(Medico medico) {
         tfPessoa.setText(medico.getPessoa().getNome());
-        tfEspecialidade.setText(medico.getEspecialidade().getDescricao());
+        tfEspecialidade.setText(medico.getEspecialidade());
         tfCrm.setText(medico.getCrm());
         tfDataInscricao.setText(medico.getDataInscricao().toString());
         tfSituacao.setText(medico.getSituacao());   

@@ -379,7 +379,7 @@ public class VisualizaPessoaView extends javax.swing.JFrame implements PessoaObs
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

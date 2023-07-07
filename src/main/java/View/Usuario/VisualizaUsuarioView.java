@@ -189,7 +189,7 @@ public class VisualizaUsuarioView extends javax.swing.JFrame implements UsuarioO
 
     @Override
     public void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        //JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
