@@ -11,8 +11,13 @@ import Model.Agendamento;
 import Model.Medico;
 import Model.Pessoa;
 import TableModel.AgendamentoTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -97,5 +102,26 @@ public class AgendamentoController implements ListObserver{
         for(AgendamentoObserver view : agendamentoView){
             view.exibirMensagem("Agendamento excluído com sucesso !");
         }
+    }
+    
+    public void validaData(String data) throws Exception {
+        //Validamos se a data informada pelo usuário está no padrão
+        String padrao = "\\d{2}/\\d{2}/\\d{4}";
+        Pattern padraoData = Pattern.compile(padrao);
+        Matcher matcher = padraoData.matcher(data);
+        if(matcher.matches()){
+            //Validamos se a data não está no passado
+            if(!formatStringtoDate(data).before(new Date())){
+            } else {
+                throw new Exception("A \"Data\" não pode estar no passado.");
+            }
+        } else {
+            throw new Exception("O campo \"Data\" não está no formato correto. Exemplo \"12/10/2023\".");
+        }
+    }
+    
+    private Date formatStringtoDate(String data) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.parse(data);
     }
 }

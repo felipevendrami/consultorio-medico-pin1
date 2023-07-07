@@ -54,6 +54,7 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
         btConfirmar.addActionListener(e -> {
             try {
                 validaCampos();
+                agendamentoController.validaData(tfData.getText());
                 agendamentoController.gravarAgendamento(montaAgendamento());
                 setVisible(false);
             } catch (Exception ex) {
