@@ -15,7 +15,6 @@ import TableModel.MedicoTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import View.Listas.ListaPessoasView;
-
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;

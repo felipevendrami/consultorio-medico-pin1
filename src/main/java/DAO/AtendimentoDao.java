@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import Model.Medico;
+import Model.Atendimento;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -12,12 +12,12 @@ import javax.persistence.Query;
  *
  * @author felip
  */
-public class MedicoDao extends AcessoBD {
+public class AtendimentoDao extends AcessoBD {
 
-    public void addMedico(Medico medico) throws Exception {
+    public void addAtendimento(Atendimento atendimento) throws Exception {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(medico);
+            entityManager.persist(atendimento);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -25,9 +25,9 @@ public class MedicoDao extends AcessoBD {
         }
     }
 
-    public List getTodosMedicos() throws Exception {
+    public List getTodosAtendimentos() throws Exception {
         try {
-            Query query = entityManager.createQuery("select m from Medico m");
+            Query query = entityManager.createQuery("select m from Atendimento m");
             return query.getResultList();
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -35,22 +35,22 @@ public class MedicoDao extends AcessoBD {
         }
     }
 
-    public Medico getMedico(Long idMedico) throws Exception {
+    public Atendimento getAtendimento(Long idAtendimento) throws Exception {
         try {
-            return entityManager.find(Medico.class, idMedico);
+            return entityManager.find(Atendimento.class, idAtendimento);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             throw new Exception("Ocorreu um problema durante a busca do médico.");
         }
     }
     
-    public void modifyMedico(Medico medicoMod) throws Exception{
+    public void modifyAtendimento(Atendimento atendimentoMod) throws Exception{
         try {
             
-            Medico medico = getMedico(medicoMod.getIdMedico());
-            medico = medicoMod;
+            Atendimento atendimento = getAtendimento(atendimentoMod.getIdAtendimento());
+            atendimento = atendimentoMod;
             entityManager.getTransaction().begin();
-            entityManager.merge(medico);
+            entityManager.merge(atendimento);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -58,17 +58,13 @@ public class MedicoDao extends AcessoBD {
         }
     }
 
-    public void deleteMedico(Medico medico) throws Exception{
+    public void deleteAtendimento(Atendimento atendimento) throws Exception{
         try {            
             entityManager.getTransaction().begin();
-            entityManager.remove(medico);
+            entityManager.remove(atendimento);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-<<<<<<< HEAD
-            throw new Exception("Ocorreu um problema durante a exclusão da médico.");
-=======
             throw new Exception("Ocorre um problema durante a exclusão da médico.");
->>>>>>> master
         }
     }
     

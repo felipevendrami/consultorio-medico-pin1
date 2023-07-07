@@ -59,9 +59,13 @@ public class AlterarAgendamentoView extends javax.swing.JFrame implements Agenda
         btConfirmar.addActionListener(e -> {
             try {
                 validaCampos();
+<<<<<<< HEAD
                 agendamentoController.validaData(tfData.getText());
                 agendamentoController.modificaAgendamento(montaAgendamento());
                 agendamentoController.removeViewObserver(this);
+=======
+                agendamentoController.modificaAgendamento(montaAgendamento());
+>>>>>>> master
                 setVisible(false);
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());

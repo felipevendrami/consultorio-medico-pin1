@@ -47,6 +47,7 @@ public class Endereco {
     private String uf;
 
     @Column(nullable = false, length = 200)
+
     private String logradouro;
 
     public Endereco(){}
