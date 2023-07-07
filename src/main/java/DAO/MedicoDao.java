@@ -64,7 +64,7 @@ public class MedicoDao extends AcessoBD {
             entityManager.remove(medico);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            throw new Exception("Ocorre um problema durante a exclusão da médico.");
+            throw new Exception("Ocorreu um problema durante a exclusão da médico.");
         }
     }
     

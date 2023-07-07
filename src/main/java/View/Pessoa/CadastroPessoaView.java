@@ -32,24 +32,16 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
     }
 
     private void addAcoes(){
-        btConfirmar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    validaCampos();
-                    pessoaController.gravarPessoa(montaPessoa());
-                    setVisible(false);
-                } catch (Exception ex) {
-                    exibirMensagem(ex.getMessage());
-                }
-            }
-        });
-        btVoltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btConfirmar.addActionListener(e -> {
+            try {
+                validaCampos();
+                pessoaController.gravarPessoa(montaPessoa());
                 setVisible(false);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
             }
         });
+        btVoltar.addActionListener(e -> setVisible(false));
     }
     
     private void validaCampos() throws Exception{
@@ -68,9 +60,9 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         } else if (tfBairro.getText().isBlank()){
             throw new Exception("Campo \"Bairro\" é obrigatório.");
         } else if (tfCidade.getText().isBlank()){
-            throw new Exception("Campo \"Número\" é obrigatório.");
-        } else if (tfNumero.getText().isBlank()){
             throw new Exception("Campo \"Cidade\" é obrigatório.");
+        } else if (tfNumero.getText().isBlank()){
+            throw new Exception("Campo \"Número\" é obrigatório.");
         } else if (tfUf.getText().isBlank()){
             throw new Exception("Campo \"UF\" é obrigatório.");
         }

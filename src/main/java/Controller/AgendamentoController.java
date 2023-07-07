@@ -111,8 +111,7 @@ public class AgendamentoController implements ListObserver{
         Matcher matcher = padraoData.matcher(data);
         if(matcher.matches()){
             //Validamos se a data não está no passado
-            if(!formatStringtoDate(data).before(new Date())){
-            } else {
+            if(formatStringtoDate(data).before(new Date())){
                 throw new Exception("A \"Data\" não pode estar no passado.");
             }
         } else {

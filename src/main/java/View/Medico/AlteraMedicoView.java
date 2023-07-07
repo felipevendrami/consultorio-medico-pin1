@@ -13,6 +13,7 @@ import Model.Pessoa;
 import TableModel.MedicoTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -61,9 +62,8 @@ public class AlteraMedicoView extends javax.swing.JFrame implements MedicoObserv
         });
     }
 
-    private Medico montaMedico() {
-        Date dataAtual = new Date();
-        Medico medico = new Medico(null, tfCrm.getText(), dataAtual , tfSituacao.getText());
+    private Medico montaMedico() throws ParseException {
+        Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText());
         return medico;
     }
 

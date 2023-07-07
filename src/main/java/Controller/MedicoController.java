@@ -11,7 +11,10 @@ import Model.Medico;
 import Model.Pessoa;
 import TableModel.MedicoTableModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -74,6 +77,16 @@ public class MedicoController  implements ListObserver{
         preencherTabelaMedico();
         for(MedicoObserver view : medicoView){
             view.exibirMensagem("Medico excluído com sucesso !");
+        }
+    }
+
+    public void validaData(String data) throws Exception {
+        //Validamos se a data informada pelo usuário está no padrão
+        String padrao = "\\d{2}/\\d{2}/\\d{4}";
+        Pattern padraoData = Pattern.compile(padrao);
+        Matcher matcher = padraoData.matcher(data);
+        if(!matcher.matches()){
+            throw new Exception("O campo \"Data\" não está no formato correto. Exemplo \"12/10/2023\".");
         }
     }
 

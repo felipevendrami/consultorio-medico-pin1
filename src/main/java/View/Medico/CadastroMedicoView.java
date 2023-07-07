@@ -15,6 +15,8 @@ import TableModel.MedicoTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import View.Listas.ListaPessoasView;
+
+import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -46,16 +48,14 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
             } catch (Exception ex) {
             }
         });
-        btConfirmar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    validaCampos();
-                    medicoController.gravarMedico(montaMedico());
-                    setVisible(false);
-                } catch (Exception ex) {
-                    exibirMensagem(ex.getMessage());
-                }
+        btConfirmar.addActionListener(e -> {
+            try {
+                validaCampos();
+                medicoController.validaData(tfDataInscricao.getText());
+                medicoController.gravarMedico(montaMedico());
+                setVisible(false);
+            } catch (Exception ex) {
+                exibirMensagem(ex.getMessage());
             }
         });
        btVoltar.addActionListener(e -> {
@@ -79,9 +79,8 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
         }
     }
     
-    private Medico montaMedico(){
-        Date dataAtual = new Date();
-        Medico medico = new Medico(null, tfCrm.getText(), dataAtual , tfSituacao.getText());
+    private Medico montaMedico() throws ParseException {
+        Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText());
         return medico;
     }
     

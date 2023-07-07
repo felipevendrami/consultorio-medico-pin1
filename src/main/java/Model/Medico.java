@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.JoinColumn;
 
@@ -42,10 +44,10 @@ public class Medico {
 
     public Medico() {}
 
-    public Medico(Pessoa pessoa, String crm, Date dataInscricao, String situacao) {
+    public Medico(Pessoa pessoa, String crm, String dataInscricao, String situacao) throws ParseException {
         this.pessoa = pessoa;
         this.crm = crm;
-        this.dataInscricao = dataInscricao;
+        this.dataInscricao = formatStringtoDate(dataInscricao);
         this.situacao = situacao;
     }
 
@@ -96,5 +98,11 @@ public class Medico {
     public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
+
+    private Date formatStringtoDate(String data) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.parse(data);
+    }
+
 }
 
