@@ -8,8 +8,6 @@ import View.Agendamento.ConsultaAgendamentoView;
 import View.Medico.ConsultaMedicoView;
 import View.Pessoa.ConsultaPessoaView;
 import View.Pessoa.ConsultaUsuarioView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  *

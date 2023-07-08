@@ -43,7 +43,7 @@ public class Medico {
 
     public Medico() {}
 
-    public Medico(Pessoa pessoa, String crm, String dataInscricao, String situacao, String Especialidade) throws ParseException {
+    public Medico(Pessoa pessoa, String crm, String dataInscricao, String situacao, String especialidade) throws ParseException {
         this.pessoa = pessoa;
         this.crm = crm;
         this.dataInscricao = formatStringtoDate(dataInscricao);

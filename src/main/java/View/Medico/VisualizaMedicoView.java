@@ -91,8 +91,10 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
         jLabel3.setText("Pessoa:");
 
         tfPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfPessoa.setEnabled(false);
 
         tfEspecialidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfEspecialidade.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Especialidade:");
@@ -101,6 +103,7 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
         jLabel5.setText("CRM:");
 
         tfDataInscricao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfDataInscricao.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Data de Inscrição:");
@@ -109,16 +112,20 @@ public class VisualizaMedicoView extends javax.swing.JFrame implements MedicoObs
         jLabel7.setText("Situação:");
 
         tfSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfSituacao.setEnabled(false);
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Senha de Acesso:");
 
         tfSenhaAcesso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfSenhaAcesso.setEnabled(false);
 
         tfCrm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tfCrm.setEnabled(false);
 
         btListarPessoas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btListarPessoas.setText("Lista");
+        btListarPessoas.setEnabled(false);
 
         javax.swing.GroupLayout jpGeralLayout = new javax.swing.GroupLayout(jpGeral);
         jpGeral.setLayout(jpGeralLayout);
