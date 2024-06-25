@@ -14,7 +14,18 @@ import javax.persistence.Persistence;
  */
 public class AcessoBD {
     
-    protected EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("whitehouse");
-    protected EntityManager entityManager = entityManagerFactory.createEntityManager();
+    protected static EntityManagerFactory entityManagerFactory;
+    protected static EntityManager entityManager;
     
+    public AcessoBD(){}
+    
+    public static void setPersistenseUnitProd(){
+        entityManagerFactory = Persistence.createEntityManagerFactory("whitehouse");
+        entityManager = entityManagerFactory.createEntityManager();
+    }
+    
+    public static void setPersistenseUnitTest(){
+        entityManagerFactory = Persistence.createEntityManagerFactory("whitehouse-test");
+        entityManager = entityManagerFactory.createEntityManager();
+    }
 }

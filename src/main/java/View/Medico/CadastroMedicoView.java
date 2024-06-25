@@ -78,7 +78,7 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
         }
     }
     
-    private Medico montaMedico() throws ParseException {
+    public Medico montaMedico() throws ParseException {
         Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText(), tfEspecialidade.getText());
         return medico;
     }

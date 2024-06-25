@@ -4,6 +4,7 @@
  */
 package App;
 
+import DAO.AcessoBD;
 import View.Menu.LoginView;
 import View.Menu.MenuUsuarioView;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ public class Run {
     
     public static void main(String[] args) {
         
+        AcessoBD.setPersistenseUnitProd();
         MenuUsuarioView menuUsuarioView = new MenuUsuarioView();
         menuUsuarioView.setVisible(true);
         

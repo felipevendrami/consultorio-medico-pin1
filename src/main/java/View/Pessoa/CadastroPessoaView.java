@@ -68,12 +68,12 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         }
     }
     
-    private Pessoa montaPessoa(){
+    public Pessoa montaPessoa(){
         Pessoa pessoa = new Pessoa(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
         return pessoa;
     }
     
-    private Endereco montaEndereco(){
+    public Endereco montaEndereco(){
         return new Endereco(Integer.parseInt(tfCep.getText()), tfBairro.getText(), tfComplemento.getText(), tfCidade.getText(), Integer.parseInt(tfNumero.getText()), tfUf.getText(), tfLogradouro.getText());
     }
     
