@@ -28,4 +28,9 @@ public class AcessoBD {
         entityManagerFactory = Persistence.createEntityManagerFactory("whitehouse-test");
         entityManager = entityManagerFactory.createEntityManager();
     }
+
+    public static void closeEntityManager(){
+        entityManager.close();
+        entityManagerFactory.close();
+    }
 }

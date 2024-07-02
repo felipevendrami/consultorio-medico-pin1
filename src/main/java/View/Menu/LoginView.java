@@ -6,7 +6,8 @@ package View.Menu;
 
 import Controller.LoginController;
 import Controller.Observer.LoginObserver;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 /**
  *
@@ -30,13 +31,25 @@ public class LoginView extends javax.swing.JFrame implements LoginObserver{
     private void addAcoes(){
         btLogin.addActionListener(e -> {
             try {
-                validaCampos();
-                loginController.autenticarUsuario(tfUsuario.getText(), pfSenha.getText());
+                //validaCampos();
+                //loginController.autenticarUsuario(tfUsuario.getText(), pfSenha.getText());
+                autenticaUsuario();
             } catch (Exception ex) {
                 exibirMensagem(ex.getMessage());
             }
         });
     }
+
+
+    public void autenticaUsuario() throws Exception {
+        try{
+            validaCampos();
+            this.loginController.autenticarUsuario(tfUsuario.getText(), pfSenha.getText());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
     
     private void validaCampos() throws Exception{
         if(tfUsuario.getText().isBlank()){
@@ -45,7 +58,17 @@ public class LoginView extends javax.swing.JFrame implements LoginObserver{
             throw new Exception("Campo \"Senha\" é obrigatório.");
         }
     }
-    
+
+    public void setPfSenha(String pfSenha) {
+        JPasswordField jPasswordField = new JPasswordField(pfSenha);
+        this.pfSenha = jPasswordField;
+    }
+
+    public void setTfUsuario(String tfUsuario) {
+        JTextField jtextField = new JTextField(tfUsuario);
+        this.tfUsuario = jtextField;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

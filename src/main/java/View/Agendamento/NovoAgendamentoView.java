@@ -13,7 +13,7 @@ import TableModel.AgendamentoTableModel;
 import View.Listas.ListaMedicosView;
 import View.Listas.ListaPessoasView;
 import java.text.ParseException;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -53,7 +53,7 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
         });
         btConfirmar.addActionListener(e -> {
             try {
-                validaCampos();
+                //validaCampos();
                 agendamentoController.validaData(tfData.getText());
                 agendamentoController.gravarAgendamento(montaAgendamento());
                 agendamentoController.removeViewObserver(this);
@@ -68,16 +68,17 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
         });
     }
     
-    private Agendamento montaAgendamento() throws ParseException{
+    public Agendamento montaAgendamento() throws Exception {
+        validaCampos();
         Agendamento agendamento = new Agendamento(null, taProcedimento.getText(), tfData.getText(), null);
         return agendamento;
     }
         
     private void validaCampos() throws Exception{
         if(tfPaciente.getText().isBlank()){
-            throw new Exception("Você precisa selecionar uma Pessoa para prosseguir.");
+            throw new Exception("Campo \"Paciente\" é de preenchimento obrigatório.");
         } else if (tfPaciente.getText().isBlank()){
-            throw new Exception("Você precisa selecionar um Médico para prosseguir.");
+            throw new Exception("Campo \"Médico\" é de preenchimento obrigatório.");
         } else if (tfData.getText().isBlank()){
             throw new Exception("Campo \"Data\" é obrigatório.");
         } else if (taProcedimento.getText().isBlank()){
@@ -240,10 +241,41 @@ public class NovoAgendamentoView extends javax.swing.JFrame implements Agendamen
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setTaProcedimento(String taProcedimento) {
+        JTextArea jTextArea = new JTextArea(taProcedimento);
+        this.taProcedimento = jTextArea;
+    }
+
+    public void setTfData(String tfData) {
+        JTextField jTextField = new JTextField(tfData);
+        this.tfData = jTextField;
+    }
+
+    public void setTfMedico(Medico medico) {
+        String valor;
+        if(medico == null) {
+            valor = "";
+        } else {
+            valor = medico.getPessoa().getNome();
+        }
+        JTextField jTextField = new JTextField(valor);
+        this.tfMedico = jTextField;
+    }
+
+    public void setTfPaciente(Pessoa paciente) {
+        String valor;
+        if(paciente == null) {
+            valor = "";
+        } else {
+            valor = paciente.getNome();
+        }
+        JTextField jTextField = new JTextField(valor);
+        this.tfPaciente = jTextField;
+    }
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;

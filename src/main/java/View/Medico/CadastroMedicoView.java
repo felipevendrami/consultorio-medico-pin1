@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import View.Listas.ListaPessoasView;
 import java.text.ParseException;
 import java.util.Date;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -49,7 +49,7 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
         });
         btConfirmar.addActionListener(e -> {
             try {
-                validaCampos();
+                //validaCampos();
                 medicoController.validaData(tfDataInscricao.getText());
                 medicoController.gravarMedico(montaMedico());
                 setVisible(false);
@@ -78,9 +78,14 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
         }
     }
     
-    public Medico montaMedico() throws ParseException {
-        Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText(), tfEspecialidade.getText());
-        return medico;
+    public Medico montaMedico() throws Exception {
+        try {
+            validaCampos();
+            Medico medico = new Medico(null, tfCrm.getText(), tfDataInscricao.getText(), tfSituacao.getText(), tfEspecialidade.getText());
+            return medico;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
     
     /**
@@ -268,9 +273,46 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setTfCrm(String tfCrm) {
+        JTextField jTextField = new JTextField(tfCrm);
+        this.tfCrm = jTextField;
+    }
+
+    public void setTfDataInscricao(String tfDataInscricao) {
+        JTextField jTextField = new JTextField(tfDataInscricao);
+        this.tfDataInscricao = jTextField;
+    }
+
+    public void setTfEspecialidade(String tfEspecialidade) {
+        JTextField jTextField = new JTextField(tfEspecialidade);
+        this.tfEspecialidade = jTextField;
+    }
+
+    public void setTfPessoa(Pessoa tfPessoa) {
+        String valor;
+        if(tfPessoa == null) {
+            valor = "";
+        } else {
+            valor = tfPessoa.getNome();
+        }
+        JTextField jTextField = new JTextField(valor);
+        this.tfPessoa = jTextField;
+    }
+
+    public void setTfSenhaAcesso(String tfSenhaAcesso) {
+        JTextField jTextField = new JTextField(tfSenhaAcesso);
+        this.tfSenhaAcesso = jTextField;
+    }
+
+    public void setTfSituacao(String tfSituacao) {
+        JTextField jTextField = new JTextField(tfSituacao);
+        this.tfSituacao = jTextField;
+    }
+
     /**
      * @param args the command line arguments
      */
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -297,7 +339,7 @@ public class CadastroMedicoView extends javax.swing.JFrame implements MedicoObse
 
     @Override
     public void exibirMensagem(String msg) {
-        //JOptionPane.showMessageDialog(null, msg);
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override

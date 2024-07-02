@@ -4,6 +4,8 @@
  */
 package DAO;
 
+import Model.Endereco;
+import Model.Pessoa;
 import Model.Usuario;
 import java.util.List;
 import javax.persistence.Query;

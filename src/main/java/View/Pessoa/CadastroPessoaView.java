@@ -11,7 +11,7 @@ import Model.Pessoa;
 import TableModel.PessoaTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -34,7 +34,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
     private void addAcoes(){
         btConfirmar.addActionListener(e -> {
             try {
-                validaCampos();
+                //validaCampos();
                 pessoaController.gravarPessoa(montaPessoa());
                 setVisible(false);
             } catch (Exception ex) {
@@ -68,9 +68,14 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         }
     }
     
-    public Pessoa montaPessoa(){
-        Pessoa pessoa = new Pessoa(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
-        return pessoa;
+    public Pessoa montaPessoa() throws Exception {
+        try {
+            validaCampos();
+            Pessoa pessoa = new Pessoa(tfNome.getText(), Long.parseLong(tfCpf.getText()), getGenero(), tfEmail.getText(), Long.parseLong(tfContato.getText()), montaEndereco());
+            return pessoa;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
     
     public Endereco montaEndereco(){
@@ -382,10 +387,72 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setCbGenero(String cbGenero) {
+        if (cbGenero.equals("M")){
+            this.cbGenero.setSelectedItem("Masculino");
+        } else {
+            this.cbGenero.setSelectedItem("Feminino");
+        }
+    }
+
+    public void setTfBairro(String tfBairro) {
+        JTextField jTextField = new JTextField(tfBairro);
+        this.tfBairro = jTextField;
+    }
+
+    public void setTfCep(String tfCep) {
+        JTextField jTextField = new JTextField(tfCep);
+        this.tfCep = jTextField;
+    }
+
+    public void setTfCidade(String tfCidade) {
+        JTextField jTextField = new JTextField(tfCidade);
+        this.tfCidade = jTextField;
+    }
+
+    public void setTfComplemento(String tfComplemento) {
+        JTextField jTextField = new JTextField(tfComplemento);
+        this.tfComplemento = jTextField;
+    }
+
+    public void setTfContato(String tfContato) {
+        JTextField jTextField = new JTextField(tfContato);
+        this.tfContato = jTextField;
+    }
+
+    public void setTfCpf(String tfCpf) {
+        JTextField jTextField = new JTextField(tfCpf);
+        this.tfCpf = jTextField;
+    }
+
+    public void setTfEmail(String tfEmail) {
+        JTextField jTextField = new JTextField(tfEmail);
+        this.tfEmail = jTextField;
+    }
+
+    public void setTfLogradouro(String tfLogradouro) {
+        JTextField jTextField = new JTextField(tfLogradouro);
+        this.tfLogradouro = jTextField;
+    }
+
+    public void setTfNome(String tfNome) {
+        JTextField jTextField = new JTextField(tfNome);
+        this.tfNome = jTextField;
+    }
+
+    public void setTfNumero(String tfNumero) {
+        JTextField jTextField = new JTextField(tfNumero);
+        this.tfNumero = jTextField;
+    }
+
+    public void setTfUf(String tfUf) {
+        JTextField jTextField = new JTextField(tfUf);
+        this.tfUf = jTextField;
+    }
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
@@ -423,7 +490,7 @@ public class CadastroPessoaView extends javax.swing.JFrame implements PessoaObse
 
     @Override
     public void exibirMensagem(String msg) {
-        //JOptionPane.showMessageDialog(null, msg);
+        JOptionPane.showMessageDialog(null, msg);
     }
 
     @Override
